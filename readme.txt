@@ -1,0 +1,7 @@
+- completed update
+  - adds a cross-base station for the requested content. Strategy: we cannot replace cached content when it is being downloaded. In this strategy, five cache algorithms are changed.
+  - refines the objects contained in the program.
+  -A record of time delay and flow data is added in the emulator. These records can not only generate line graphs, but also can be saved as text.
+- the next thing to do:
+  - associate user movement with time slice. According to the mobile model, to plan the user's mobile trajectory in advance.
+  - the size of the content directly reads the actual data, in bytes. And the initial content can be applied to the next experiment.
