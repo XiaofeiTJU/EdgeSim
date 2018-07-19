@@ -150,7 +150,7 @@ public class TrafficLoadLineChart {
 			}
 			series1.add(i+1,(float)(traffic)/1024f/1024f/10f);
 		}
-		System.out.println("No cache 流量"+series1.getY(series1.getItemCount()-1));
+		System.out.println("No cache 流量"+series1.getY(series1.getItemCount()-1).intValue());
 
 		collection.addSeries(series1);
 
@@ -158,9 +158,10 @@ public class TrafficLoadLineChart {
 		HashMap<String,LinkedList<Data>> dataMap = Controller.getInstance().getResultDataList();
 		Iterator<String> it = Controller.getInstance().getResultDataList().keySet().iterator();
 		System.out.println("");
+		XYSeries series = null;
 		while(it.hasNext()){
 			String key = it.next();
-			XYSeries series = new XYSeries(key);
+			series = new XYSeries(key);
 			series.add(0,0);
 			List<Data> dataList = dataMap.get(key);
 			for (Data data : dataList) {
@@ -172,9 +173,9 @@ public class TrafficLoadLineChart {
 			System.out.println(key+"节省的流量是："+series.getY(series.getItemCount()-1));
 			collection.addSeries(series);
 		}
-		
-	
-		
+//		System.out.println(series1.getY(series1.getItemCount()-1).intValue()+"和"+series.getY(series.getItemCount()-1).intValue()+"和"+size);
+//		float n = (series1.getY(series1.getItemCount()-1).floatValue() - series.getY(series.getItemCount()-1).floatValue());
+//		System.out.println(n+"哈哈");
 		
 		
 		@SuppressWarnings("unchecked")

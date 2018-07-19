@@ -115,7 +115,7 @@ public class ContentService {
      * Initialize the popularity according to power law distribution
      */
     public static List<MySingleContent> initialPopularity(List<MySingleContent> noPopularityMediaList){
-    	ZipfDistribution zd = new ZipfDistribution(5000, 0.01);
+    	ZipfDistribution zd = new ZipfDistribution(5000, 1);
     	int [] popularity = zd.sample(noPopularityMediaList.size());
 
     	for(int i = 0 ; i<noPopularityMediaList.size();i++){

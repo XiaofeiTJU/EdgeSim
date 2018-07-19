@@ -115,6 +115,7 @@ public abstract class MobilityModel implements Query{
 		sumOfPopularity = 0;//The total popularity
 		//Calculate the total popularity
 		Iterator<MySingleContent> it = this.content.getContentList().iterator();
+		
 		while(it.hasNext()){
 			sumOfPopularity += it.next().getMyPopularity();
 		}

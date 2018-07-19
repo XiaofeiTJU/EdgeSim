@@ -135,41 +135,62 @@ public class DelayLineChart {
 		XYSeriesCollection collection = new XYSeriesCollection();
 		
 		//计算总流量
-				StateQueue sq =  Controller.getInstance().getStateQueue();
-				int size = Controller.getInstance().getResultDataList().get("Knaspsack").size();
+//				StateQueue sq =  Controller.getInstance().getStateQueue();
+//				int size = Controller.getInstance().getResultDataList().get("Knaspsack").size();
 
 		
 		HashMap<String,LinkedList<Data>> dataMap = Controller.getInstance().getResultDataList();
-		XYSeries series1 = new XYSeries("No Cache");
-		series1.add(0,0);
-		int delay = 0;
-		int initialDelay = Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY+Parameter.USER_TO_BS_DELAY;
-		for(int i = 0 ;i<size;i++){
-			for(int j = 0 ; j <sq.getStateList(i).size();j++){
-				delay += initialDelay;
-			};
-			series1.add(i+1,(float)(delay)/10000f);
-		}
-		System.out.println("No cache shi'yan"+series1.getY(series1.getItemCount()-1));
-		collection.addSeries(series1);
+//		XYSeries series1 = new XYSeries("No Cache");
+//		series1.add(0,0);
+//		int delay = 0;
+//		int initialDelay = Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY+Parameter.USER_TO_BS_DELAY;
+//		for(int i = 0 ;i<size;i++){
+//			for(int j = 0 ; j <sq.getStateList(i).size();j++){
+//				delay += initialDelay;
+//			};
+//			series1.add(i+1,(float)(delay)/10000f);
+//		}
+//		System.out.println("No cache shi'yan"+series1.getY(series1.getItemCount()-1));
+//		collection.addSeries(series1);
 		
 		
-		Iterator<String> it = Controller.getInstance().getResultDataList().keySet().iterator();
-		System.out.println("");
-		while(it.hasNext()){
-			String key = it.next();
+//		Iterator<String> it = Controller.getInstance().getResultDataList().keySet().iterator();
+//		while(it.hasNext()){
+//			String key = it.next();
+//			XYSeries series = new XYSeries(key);
+//			series.add(0,0);
+//			List<Data> dataList = dataMap.get(key);
+//			for (Data data : dataList) {
+//				int index = data.getTimeSlice()+1;
+//				int temp = series1.getY(index).intValue();
+//				series.add(data.getTimeSlice()+1,(float)temp-(float)(data.getSaveTime()/10000));
+//			}
+//			System.out.println(key+"节省的时延是："+series.getY(series.getItemCount()-1));
+//			
+//			collection.addSeries(series);
+//		}
+//		
+		
+		
+		/**
+		 * 马上删除!!!
+		 */
+		Iterator<String> mtt = Controller.getInstance().getResultDataList().keySet().iterator();
+		while(mtt.hasNext()){
+			String key = mtt.next();
 			XYSeries series = new XYSeries(key);
-			series.add(0,0);
 			List<Data> dataList = dataMap.get(key);
 			for (Data data : dataList) {
-				int index = data.getTimeSlice()+1;
-				int temp = series1.getY(index).intValue();
-				series.add(data.getTimeSlice()+1,(float)temp-(float)(data.getSaveTime()/10000));
-			}
-			System.out.println(key+"节省的时延是："+series.getY(series.getItemCount()-1));
-			
+				series.add(data.getTimeSlice()+1,(float)(data.getSaveTime()));
+			}			
 			collection.addSeries(series);
 		}
+		
+		
+		/**
+		 * 马上删除!!!
+		 */
+	
 		@SuppressWarnings("unchecked")
 		List <XYSeries>list = collection.getSeries();
 		XYSeriesCollection collect = new XYSeriesCollection();

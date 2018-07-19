@@ -34,34 +34,20 @@ public class ContentReader {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse("data/CONTAINT.xml");
-			NodeList containt = document.getChildNodes();
+			NodeList containt = document.getElementsByTagName("media");
 			
 			for (int i = 0; i < containt.getLength(); i++) {
-				Node media = containt.item(i);
-				NodeList mediaInfo = media.getChildNodes();
-
-				for (int j = 0; j <4000; j++) {
-					Node node = mediaInfo.item(j);
-					if (node instanceof Element) {
-						NodeList mediaMeta = node.getChildNodes();
-						tempMedia = new InitialSingleContent();
-						for (int k = 0; k < mediaMeta.getLength(); k++) {
-							if (mediaMeta.item(k).getNodeName().equals("name")) {
-								tempMedia.setName(mediaMeta.item(k).getTextContent());
-							}if(mediaMeta.item(k).getNodeName().equals("size")){
-								if(mediaMeta.item(k).getTextContent().equals("0")){
-									tempMedia.setSize(Integer.parseInt("1"));
-								}else{
-									tempMedia.setSize(Integer.parseInt(mediaMeta.item(k).getTextContent()));
-								}
-//								tempMedia.setSize((r.nextInt(40)+1)*1024);
-							}if(mediaMeta.item(k).getNodeName().equals("popularity")){
-								tempMedia.setPopularity(Integer.parseInt(mediaMeta.item(k).getTextContent()));
-							}
-						}
-						mediaList.add(tempMedia);
-					}
+				tempMedia = new InitialSingleContent();
+				tempMedia.setName(document.getElementsByTagName("name").item(i).getFirstChild().getNodeValue());
+				String size =  document.getElementsByTagName("size").item(i).getFirstChild().getNodeValue();
+				if(size.equals("0")){
+					tempMedia.setSize(Integer.parseInt("1"));
+				}else{
+					tempMedia.setSize(Integer.parseInt(size));
 				}
+				tempMedia.setPopularity(Integer.parseInt(document.getElementsByTagName("popularity").item(i).getFirstChild().getNodeValue()));
+
+				mediaList.add(tempMedia);
 			}
 
 		} catch (FileNotFoundException e) {

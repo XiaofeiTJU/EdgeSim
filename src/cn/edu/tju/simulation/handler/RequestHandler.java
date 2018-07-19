@@ -66,13 +66,16 @@ public class RequestHandler {
 			controller.getResultDataList().put(algorithm, dataList);
 			
 		}
+		/**
+		 * 赶紧取消注释
+		 */
 			//画图用的数据类
 			Data data = new Data(times);
-			if(times != 0){
-				data.setSaveTime(controller.getResultDataList().get(algorithm).getLast().getSaveTime());
-				data.setSaveTraffic(controller.getResultDataList().get(algorithm).getLast().getSaveTraffic());
-			}
-			
+//			if(times != 0){
+//				data.setSaveTime(controller.getResultDataList().get(algorithm).getLast().getSaveTime());
+//				data.setSaveTraffic(controller.getResultDataList().get(algorithm).getLast().getSaveTraffic());
+//			}
+//			
 			
 			for(int j =0;j<BSs.getAmount();j++){
 				WirelessNetwork network = BSs.getNetwork(j);
@@ -102,9 +105,16 @@ public class RequestHandler {
 				WirelessNetwork network = user.getWirelessNetwork();
 				if(user.getWirelessNetwork().query(state.getUser(),requestedContent)){
 					controller.appendLog(null,times+" User "+state.getUser().getID()+" in the network "+network.getNumber()+" request content is "+state.getRequestSingleContent().getName()+"----hit!",null);
+					
+					
 					//按时间片的数量，单位时间片节省的时延
-					data.addSaveTime((Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY));
+//					data.addSaveTime((Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY));
 					data.addSaveTraffic(state.getRequestSingleContent().getSize());
+
+					
+					
+					data.addSaveTime(Parameter.USER_TO_BS_DELAY);
+					
 					hit =true;
 				}else{
 					controller.appendLog(null,times+" User "+state.getUser().getID()+" in the network "+network.getNumber()+" request content is "+state.getRequestSingleContent().getName()+"----No hit!",null);
@@ -114,13 +124,27 @@ public class RequestHandler {
 			    		//associated base stations are also not
 			        	if(!wirelessnetwork.query(network,requestedContent)){
 			        		controller.appendLog(null,times+ " View the associated base station "+wirelessnetwork.getNumber()+" No Hit！",null);
+			        		
+			        		//
+							data.addSaveTime((Parameter.USER_TO_BS_DELAY+Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY));
+	
+			        		
+			        		
 			        	}else{
 			        	//associated base stations have
 			        		controller.appendLog(null,times+ " View the associated base station "+wirelessnetwork.getNumber()+" Hit！",null);
 							hit =true;
 			        		network.addHitAmount();
-							data.addSaveTime((Parameter.BS_TO_BS_DELAY+Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY));
+			        		
+			        		
+			        		
+//							data.addSaveTime((Parameter.BS_TO_BS_DELAY+Parameter.BS_TO_MNO_DELAY +Parameter.MNO_TO_CLOUD_DELAY));
 							data.addSaveTraffic(state.getRequestSingleContent().getSize());
+							
+							
+							data.addSaveTime((Parameter.BS_TO_BS_DELAY));
+							
+							
 							break;
 			        	}
 			    	}
@@ -170,6 +194,10 @@ public class RequestHandler {
 
 		
 			data.setHitRate(mfloat);
+			
+			
+			data.setSaveTime(data.getSaveTime()/size);
+			data.setSaveTraffic(data.getSaveTraffic()/size);
 
 			controller.getResultDataList().get(algorithm).add(data);
 			

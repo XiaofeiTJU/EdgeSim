@@ -52,9 +52,14 @@ public class ContentWriter {
 	            Element size = document.createElement("size");
 	            size.setTextContent((String.valueOf((int)((fileSizeList.get(i).getSize())*(r.nextFloat()+0.1)))));
 	            
+	            Element popularity = document.createElement("popularity");
+	            popularity.setTextContent((String.valueOf((int)((fileSizeList.get(i).getPopularity())))));
+	            
 	            type.appendChild(name); 
 	            type.appendChild(size);
+	            type.appendChild(popularity);
 	            rootElement.appendChild(type);  
+	            
 	        }
 	          
 	        //将包含了子节点的rootElement添加到document中  

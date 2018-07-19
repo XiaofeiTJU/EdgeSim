@@ -139,10 +139,6 @@ public class TimeLineChart {
 	
 	public XYSeriesCollection getCollection() {
 		XYSeriesCollection collection = new XYSeriesCollection();
-	
-
-		
-		
 		HashMap<String,LinkedList<Data>> dataMap = Controller.getInstance().getResultDataList();
 		Iterator<String> it = Controller.getInstance().getResultDataList().keySet().iterator();
 		while(it.hasNext()){
@@ -160,6 +156,9 @@ public class TimeLineChart {
 		List <XYSeries> list = collection.getSeries();
 		XYSeriesCollection collect = new XYSeriesCollection();
 
+		/**
+		 * 
+		 */
 	
 		for(int i = 0 ;i<list.size();i++){
 			if(list.get(i).getKey().equals("Knaspsack")){

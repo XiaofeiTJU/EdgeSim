@@ -283,7 +283,7 @@ public class Operate extends JPanel{
 					Cache.add(cacheSizeLabel);
 					Cache.add(cacheSizeText);
 					Cache.setLayout(new GridLayout(0, 2, 0, 3));
-					cacheSizeText.setText("0.2");
+					cacheSizeText.setText("0.15");
 				}
 				
 				{

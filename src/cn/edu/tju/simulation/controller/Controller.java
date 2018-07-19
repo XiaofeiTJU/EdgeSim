@@ -133,13 +133,14 @@ public class Controller {
 		
 		this.originalContent = new MyContent();
 		List<InitialSingleContent> list = new ContentReader().read();
-		Iterator<InitialSingleContent> it = list.iterator();
-		while(it.hasNext()){
-			InitialSingleContent  isc = it.next();
-			if(isc.getSize()<5120 || isc.getSize() > 500000){
-				it.remove();
-			}
-		}
+		
+//		Iterator<InitialSingleContent> it = list.iterator();
+//		while(it.hasNext()){
+//			InitialSingleContent  isc = it.next();
+//			if(isc.getSize()<5120 || isc.getSize() > 500000){
+//				it.remove();
+//			}
+//		}
 		
 //		Random r = new Random();
 //		for(int i = 10000;i<20194;i++){
