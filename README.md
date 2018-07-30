@@ -15,6 +15,7 @@ An open-source simulator of edge computing and caching.
 
 ----
 ## Chat
+Welcome everyone to perfect this system, if you have any questions or ideas, please feel free to contact me. [New Issue](https://github.com/XiaofeiTJU/EdgeSim/issues/new).
 
 ----
 ## License
