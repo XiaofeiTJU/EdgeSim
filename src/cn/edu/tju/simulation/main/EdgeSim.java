@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -106,10 +107,13 @@ import cn.edu.tju.simulation.swing.operator.Signal;
 			
 			//Initialize main frame
 			mainFrame = new JFrame();
-			mainFrame.setTitle("Edge Caching Simulation");
+			mainFrame.setTitle("EdgeSim");
 			mainFrame.setBounds(200,200, 1400, 1050);
 //			mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); .
 			mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			ImageIcon icon=new ImageIcon("images/icon.png");  //xxx代表图片存放路径，2.png图片名称及格式  
+			mainFrame.setIconImage(icon.getImage());  
+			
 			
 			//Add menu
 			mainFrame.getContentPane().add(menu, BorderLayout.NORTH);
@@ -131,6 +135,7 @@ import cn.edu.tju.simulation.swing.operator.Signal;
 
 			MainPanel.setLeftComponent(MapAndLogPanel);
 			MainPanel.setRightComponent(operator);
+
 		}
 		
 		//Add listener

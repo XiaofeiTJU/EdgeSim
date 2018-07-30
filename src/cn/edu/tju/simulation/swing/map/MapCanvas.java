@@ -97,6 +97,7 @@ public class MapCanvas extends JPanel implements MouseWheelListener {
 				g.drawOval(x - (radius), (y - radius), radius*2,radius*2);
 				// Draw a Base station schematic
 				g.drawImage(image, x - (image.getWidth(this) / 2),y - (image.getHeight(this) / 2), this);
+
 			}
 			
 			//Draw the user
@@ -236,7 +237,8 @@ public class MapCanvas extends JPanel implements MouseWheelListener {
 		
 		// Draw base station
 		try {
-			image = ImageIO.read(BSFile).getScaledInstance(25, 55, 1);
+//			image = ImageIO.read(BSFile).getScaledInstance(25, 55, 1);
+			image = ImageIO.read(BSFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

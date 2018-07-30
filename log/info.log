@@ -35,3 +35,18 @@
 2018-07-30 14:17:11  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:78) ] - [ INFO ]  The program is running
 2018-07-30 14:22:40  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:78) ] - [ INFO ]  The program is running
 2018-07-30 14:23:31  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:147) ] - [ INFO ]  The program is closed normally
+2018-07-30 15:29:00  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:78) ] - [ INFO ]  The program is running
+2018-07-30 15:30:47  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:30:55  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:151) ] - [ INFO ]  The program is closed normally
+2018-07-30 15:31:49  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:34:29  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:35:42  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:42:30  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:43:55  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:152) ] - [ INFO ]  The program is closed normally
+2018-07-30 15:45:59  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:47:51  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 15:55:48  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:79) ] - [ INFO ]  The program is running
+2018-07-30 16:10:40  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:152) ] - [ INFO ]  The program is closed normally
+2018-07-30 16:10:44  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:152) ] - [ INFO ]  The program is closed normally
+2018-07-30 18:41:49  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:152) ] - [ INFO ]  The program is closed normally
+2018-07-30 18:41:52  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:152) ] - [ INFO ]  The program is closed normally
