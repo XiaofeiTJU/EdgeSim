@@ -25,8 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import cn.edu.tju.simulation.controller.Controller;
-import cn.edu.tju.simulation.swing.operate.Operate;
-import cn.edu.tju.simulation.swing.operate.Signal;
+import cn.edu.tju.simulation.swing.operator.Operator;
+import cn.edu.tju.simulation.swing.operator.Signal;
 import cn.edu.tju.simulation.user.MobilityModel;
 import cn.edu.tju.simulation.wirelessnetwork.BaseStation;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
@@ -162,7 +162,7 @@ public class MapCanvas extends JPanel implements MouseWheelListener {
 				JFrame jframe = (JFrame) getRootPane().getParent();
 				if(Signal.Button_BS_Click){
 					jframe.setCursor(Cursor.DEFAULT_CURSOR);
-					controller.getOperationPanel().getAddBS().setText(Operate.addBSName);
+					controller.getOperationPanel().getAddBS().setText(Operator.addBSName);
 					Signal.Button_BS_Click = false;
 				}else{
 					Iterator<WirelessNetwork> it = controller.getWirelessNetworkGroup().BS.getIterator();

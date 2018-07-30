@@ -94,7 +94,6 @@ public class ContentWriter {
 	        Element rootElement = document.createElement("containt"); 
 	        //创建CountryRegion节点  
 			for(int i = 0 ;i<tableColumn.size();i++){
-				
 				Vector<String> vector = tableColumn.get(i);
 	            Element type = document.createElement("media");
 	            type.setAttribute("id",vector.get(0)); 

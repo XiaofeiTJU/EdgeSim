@@ -28,7 +28,7 @@ public class ResultDateWiriter {
 			Iterator<String> it = dataMap.keySet().iterator();
 			while(it.hasNext()){
 				String algorithm = it.next();
-				bw.write(algorithm+"\r\n");
+				bw.write("Algorithm:" + algorithm+"\r\n");
 				
 				Iterator<Data> mIt = dataMap.get(algorithm).iterator();
 				int i = 0;

@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.file.CaseFileReader;
 import cn.edu.tju.simulation.file.CaseFileWriter;
-import cn.edu.tju.simulation.swing.operate.Signal;
+import cn.edu.tju.simulation.swing.operator.Signal;
 
 /**
  * Menu bar

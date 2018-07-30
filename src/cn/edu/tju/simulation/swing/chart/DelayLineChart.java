@@ -27,8 +27,6 @@ import org.jfree.ui.RectangleEdge;
 
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.data.Data;
-import cn.edu.tju.simulation.file.Parameter;
-import cn.edu.tju.simulation.state.StateQueue;
 
 /**
  * 

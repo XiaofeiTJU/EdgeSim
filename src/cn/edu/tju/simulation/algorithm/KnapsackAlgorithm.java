@@ -33,7 +33,6 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 		for (int i = 0; i < BSs.getAmount(); i++) {
 			WirelessNetwork network = BSs.getNetwork(i);
 			int size = (int)(network.getCacheSize()/1024);
-//			System.out.println("可用的空间大小："+size+"MB");
 			List<MySingleContent> canBeCachedContent= network.getCanBeCachedContent();
 			Iterator<MySingleContent> it = canBeCachedContent.iterator();			
 
@@ -45,7 +44,6 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 				MySingleContent sc = it.next();
 				mediaAmount.add(sc.getMyPopularity());
 				int temp =(int) Math.ceil(sc.getSize()/1024);
-//				System.out.println("文件的大小是："+ (double)sc.getSize()/1024+"MB");
 				mediaSize.add(temp);
 			}
 

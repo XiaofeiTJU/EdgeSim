@@ -119,12 +119,6 @@ public class NumberLineChart {
 			renderer.setSeriesStroke(3, new BasicStroke(4.0F));
 			renderer.setSeriesStroke(4, new BasicStroke(2.0F));
 			renderer.setSeriesStroke(5, new BasicStroke(2.0F));
-
-
-
-
-//		renderer.setUseFillPaint(true);
-		
 		
 			this.chartFrame = new ChartFrame("Line Chart", chart);
 			chartFrame.pack();

@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import cn.edu.tju.simulation.controller.Controller;
-import cn.edu.tju.simulation.swing.operate.Signal;
+import cn.edu.tju.simulation.swing.operator.Signal;
 import cn.edu.tju.simulation.wirelessnetwork.BaseStation;
 
 /**

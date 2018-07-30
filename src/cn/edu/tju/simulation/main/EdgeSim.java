@@ -17,8 +17,8 @@ import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.swing.log.Log;
 import cn.edu.tju.simulation.swing.map.Map;
 import cn.edu.tju.simulation.swing.menubar.MenuBar;
-import cn.edu.tju.simulation.swing.operate.Operate;
-import cn.edu.tju.simulation.swing.operate.Signal;
+import cn.edu.tju.simulation.swing.operator.Operator;
+import cn.edu.tju.simulation.swing.operator.Signal;
 
 
 /**
@@ -41,7 +41,7 @@ import cn.edu.tju.simulation.swing.operate.Signal;
 	/**
 	 * Operate container
 	 */
-	private Operate operator;
+	private Operator operator;
 	/**
 	 * Log container
 	 */
@@ -88,7 +88,7 @@ import cn.edu.tju.simulation.swing.operate.Signal;
 			//Instantiate all components and controller
 			Controller controller = new Controller();
 			this.map = new Map();
-			this.operator = new Operate();
+			this.operator = new Operator();
 			this.log = new Log();
 			this.menu = new MenuBar();
 			controller.initialController(menu,map,operator,log,controller);
@@ -170,7 +170,7 @@ import cn.edu.tju.simulation.swing.operate.Signal;
 		return map;
 	}
 
-	public Operate getOperator() {
+	public Operator getOperator() {
 		return operator;
 	}
 

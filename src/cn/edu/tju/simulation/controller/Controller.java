@@ -2,7 +2,6 @@ package cn.edu.tju.simulation.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import cn.edu.tju.simulation.state.StateQueue;
 import cn.edu.tju.simulation.swing.log.Log;
 import cn.edu.tju.simulation.swing.map.Map;
 import cn.edu.tju.simulation.swing.menubar.MenuBar;
-import cn.edu.tju.simulation.swing.operate.Operate;
+import cn.edu.tju.simulation.swing.operator.Operator;
 import cn.edu.tju.simulation.user.Users;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetworkGroup;
 
@@ -61,7 +60,7 @@ public class Controller {
 	/**
 	 * The operation panel on the  UI
 	 */
-	private Operate operationPanel;
+	private Operator operationPanel;
 	/**
 	 * The log panel on the UI
 	 */
@@ -96,7 +95,7 @@ public class Controller {
 	 * @param log The log panel on the UI
 	 * @param controller Instance of the controller
 	 */
-	public void initialController(MenuBar menuBar,Map map,Operate parameterConfiguration,Log log,Controller controller){		
+	public void initialController(MenuBar menuBar,Map map,Operator parameterConfiguration,Log log,Controller controller){		
 		this.menuBar =menuBar;
 		this.mapPanel = map;
 		this.operationPanel = parameterConfiguration;
@@ -213,7 +212,7 @@ public class Controller {
 		return requestHandler;
 	}
 	
-	public Operate getOperationPanel() {
+	public Operator getOperationPanel() {
 		return operationPanel;
 	}
 
