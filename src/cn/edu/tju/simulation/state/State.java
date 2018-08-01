@@ -1,6 +1,6 @@
 package cn.edu.tju.simulation.state;
 
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.user.MobilityModel;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
@@ -25,7 +25,7 @@ public class State implements Cloneable{
 	/**
 	 * Download content in this state
 	 */
-	private MySingleContent requestSingleContent;
+	private SingleLocalHobby requestSingleContent;
 	
 	private int remainingTimeSlotNumber;
 	
@@ -36,7 +36,7 @@ public class State implements Cloneable{
 	 * @param time The time this state occurred
 	 * @param media Download content in this state
 	 */
-	public State(MobilityModel user,String time,MySingleContent requestSingleContent){
+	public State(MobilityModel user,String time,SingleLocalHobby requestSingleContent){
 		this.user = user;
 		this.time = time;
 		this.isExecute = false;		
@@ -74,11 +74,11 @@ public class State implements Cloneable{
 	}
 
 
-	public MySingleContent getRequestSingleContent() {
+	public SingleLocalHobby getRequestSingleContent() {
 		return requestSingleContent;
 	}
 
-	public void setRequestSingleContent(MySingleContent requestSingleContent) {
+	public void setRequestSingleContent(SingleLocalHobby requestSingleContent) {
 		this.requestSingleContent = requestSingleContent;
 	}
 

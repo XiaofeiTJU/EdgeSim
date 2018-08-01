@@ -6,11 +6,10 @@ import java.util.List;
 
 import cn.edu.tju.simulation.cache.Cache;
 import cn.edu.tju.simulation.cache.Query;
-import cn.edu.tju.simulation.content.CachingSingleContent;
 import cn.edu.tju.simulation.content.ContentService;
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MyContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.LocalHobby;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.file.Parameter;
 import cn.edu.tju.simulation.state.State;
@@ -56,11 +55,11 @@ public abstract class WirelessNetwork extends Cache implements Query{
 	/**
 	 * Network's own popularity
 	 */
-	public MyContent content;	
+	public LocalHobby content;	
 	
 	public abstract int countUserOfNetwork();
 	
-	public List<MySingleContent> getCanBeCachedContent(){
+	public List<SingleLocalHobby> getCanBeCachedContent(){
 		return ContentService.sortByHobby(this.content.getContentList());
 	}
 	
@@ -72,45 +71,19 @@ public abstract class WirelessNetwork extends Cache implements Query{
 		}
 	}
 	
-	public void addHobbyByRequestContent(InitialSingleContent isc){
-		Iterator<MySingleContent> it = this.content.getContentList().iterator();
+	public void addHobbyByRequestContent(SingleContent isc){
+		Iterator<SingleLocalHobby> it = this.content.getContentList().iterator();
 		while(it.hasNext()){
-			MySingleContent mc = it.next();
+			SingleLocalHobby mc = it.next();
 			if(mc.getSingleContent() == isc){
-				mc.addMyHobby();
+				mc.addLocalHobbyValue();
 				break;
 			}
 		}
 	}
-	
-	public 	Boolean query(MySingleContent singleContent){
-		Boolean hit = false;
-		if (cacheContent != null) {
-			Iterator<CachingSingleContent> it = cacheContent.iterator();
-			while(it.hasNext()){
-				CachingSingleContent cachingSingleContent= it.next();
-				if (cachingSingleContent.getName().equals(singleContent.getName())) {
-					hit = true;
-					if(cachingSingleContent.isDownLoad()){
-						if(!cachingSingleContent.getTimeSlotNumberMapBS().keySet().contains(this)){
-							cachingSingleContent.addNewBSToTimeSlotNumberMap(this, singleContent.getTimeSlotNumber());
 
-						}else{
-//							System.out.println("这是一个基站维持的请求，不计数");
-						}
-					}else{
-						cachingSingleContent.addNewBSToTimeSlotNumberMap(this, singleContent.getTimeSlotNumber());
-					}
-					return true;
-				}
-			}
-			if(!hit){
-				cacheRequestAmount++;
-			}
-			return false;
-		} else {
-			return false;
-		}
+	public 	Boolean query(SingleLocalHobby singleContent){
+		return dealQuery(this, singleContent);
 	}
 	
 	public void  fluctuatePopularity(){
@@ -146,13 +119,11 @@ public abstract class WirelessNetwork extends Cache implements Query{
 		this.statesQueue = statesQueue;
 	}
 
-	
-	
-	public MyContent getContent() {
+	public LocalHobby getContent() {
 		return content;
 	}
 
-	public void setContent(MyContent content) {
+	public void setContent(LocalHobby content) {
 		this.content = content;
 	}
 

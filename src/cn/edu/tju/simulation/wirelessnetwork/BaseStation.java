@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import cn.edu.tju.simulation.content.CachingSingleContent;
-import cn.edu.tju.simulation.content.MyContent;
+import cn.edu.tju.simulation.content.LocalHobby;
 import cn.edu.tju.simulation.state.State;
 import cn.edu.tju.simulation.user.MobilityModel;
 
@@ -41,7 +41,7 @@ public class BaseStation extends WirelessNetwork{
 		this.type = "BS";
 		this.cacheSize = CacheSize;
 		this.radius = Radius;
-		this.content = new MyContent();
+		this.content = new LocalHobby();
 		this.userOfNetwork = new ArrayList<MobilityModel>();
 		this.relationalWirelessNetwork = new RelationalWirelessNetwork();
 		this.statesQueue = new ArrayList<State>();
@@ -61,7 +61,7 @@ public class BaseStation extends WirelessNetwork{
 		this.type = "BS";
 		this.cacheSize = CacheSize;
 		this.radius = Radius;
-		this.content = new MyContent();
+		this.content = new LocalHobby();
 		this.userOfNetwork = new ArrayList<MobilityModel>();
 		this.relationalWirelessNetwork = new RelationalWirelessNetwork();
 		this.statesQueue = new ArrayList<State>();

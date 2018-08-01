@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 
 /**
  * 
@@ -58,12 +58,12 @@ public class AddContent extends JFrame{
 	 */
 	private JButton cancel;
 
-	private List<MySingleContent> orderedMedia;
+	private List<SingleLocalHobby> orderedMedia;
 	private AddContent addContent;
 	private ViewContent viewContent;
 	
 	
-	public AddContent(ViewContent viewContent,List<MySingleContent> orderedMedia){    
+	public AddContent(ViewContent viewContent,List<SingleLocalHobby> orderedMedia){    
 		this.viewContent = viewContent; 
 		this.orderedMedia = orderedMedia;
         initial();
@@ -73,7 +73,7 @@ public class AddContent extends JFrame{
 	private class ActionListener extends MouseAdapter implements WindowListener{
 		public void mousePressed(MouseEvent e) { // Press the left mouse button
 			if(e.getSource().equals(ensure)){
-				MySingleContent media = clickEnsure();
+				SingleLocalHobby media = clickEnsure();
 				if(media != null){
 					orderedMedia.add(media);
 					viewContent.tableUpdate();
@@ -106,12 +106,12 @@ public class AddContent extends JFrame{
 		this.cancel.addMouseListener(actionListener);
 	}
 	
-	public MySingleContent clickEnsure(){
+	public SingleLocalHobby clickEnsure(){
 		String name = nameText.getText();
 		String size = sizeText.getText();
 		String popularity = popularityText.getText();
 		if(name != null && !name.trim().equals("") && size != null && !size.trim().equals("") && popularity != null && !popularity.trim().equals("")){
-			MySingleContent media = new MySingleContent(new InitialSingleContent(name,Integer.parseInt(popularity),Integer.parseInt(size)));
+			SingleLocalHobby media = new SingleLocalHobby(new SingleContent(name,Integer.parseInt(popularity),Integer.parseInt(size)));
 			return media;
 		}else{
 			return null;

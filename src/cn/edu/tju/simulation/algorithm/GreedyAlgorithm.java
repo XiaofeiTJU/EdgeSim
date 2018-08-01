@@ -3,7 +3,7 @@ package cn.edu.tju.simulation.algorithm;
 import java.util.List;
 
 import cn.edu.tju.simulation.content.ContentService;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.wirelessnetwork.SameTypeWirelessNetwork;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
@@ -16,7 +16,7 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
  */
 public class GreedyAlgorithm implements OneTimeAlgorithm{
 	Controller controller = Controller.getInstance();
-	List<MySingleContent> list = null;
+	List<SingleLocalHobby> list = null;
 	SameTypeWirelessNetwork BSs = null;
 	
 	public GreedyAlgorithm(){
@@ -41,7 +41,7 @@ public class GreedyAlgorithm implements OneTimeAlgorithm{
 			WirelessNetwork network = BSs.getNetwork(i);	
 			long size = network.getCacheSize();
 			for(int n = 0 ; n < list.size() ; n ++){
-				MySingleContent singleContent = list.get(n);
+				SingleLocalHobby singleContent = list.get(n);
 				if (size >= singleContent.getSize() && size > 0) {	
 					if(network.addCacheContent(singleContent)){
 						size -= singleContent.getSize();
@@ -52,7 +52,7 @@ public class GreedyAlgorithm implements OneTimeAlgorithm{
 			int maxPopularity = 0;
 
 			for(int j = 0;j<network.getCacheContent().size() ; j++){
-				maxPopularity += network.getCacheContent().get(j).getCachingSingleContent().getPopularity();
+				maxPopularity += network.getCacheContent().get(j).getSingleContent().getPopularity();
 			}
 
 			controller.appendLog("debug","network "+network.getNumber()+"'s maxPopularity is "+maxPopularity, null);

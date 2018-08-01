@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import cn.edu.tju.simulation.content.InitialSingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
 import cn.edu.tju.simulation.tool.StringHandler;
 
 /**
@@ -182,9 +182,9 @@ public class StateFileReader {
 	 * 
 	 * @return
 	 */
-	public static List<InitialSingleContent> XMLDocunmentContent() {
-		List<InitialSingleContent> mediaList = new ArrayList<InitialSingleContent>();
-		InitialSingleContent mediaTemp = null;
+	public static List<SingleContent> XMLDocunmentContent() {
+		List<SingleContent> mediaList = new ArrayList<SingleContent>();
+		SingleContent mediaTemp = null;
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -199,7 +199,7 @@ public class StateFileReader {
 					Node node = mediaInfo.item(j);
 					if (node instanceof Element) {
 						NodeList mediaMeta = node.getChildNodes();
-						mediaTemp = new InitialSingleContent();
+						mediaTemp = new SingleContent();
 						for (int k = 0; k < mediaMeta.getLength(); k++) {
 							if (mediaMeta.item(k).getNodeName().equals("name")) {
 								mediaTemp.setName(mediaMeta.item(k)

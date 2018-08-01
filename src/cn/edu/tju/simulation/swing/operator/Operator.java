@@ -26,7 +26,7 @@ import cn.edu.tju.simulation.algorithm.LFUAlgorithm;
 import cn.edu.tju.simulation.algorithm.LRUAlgorithm;
 import cn.edu.tju.simulation.algorithm.QLearning;
 import cn.edu.tju.simulation.content.ContentService;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.data.Data;
 import cn.edu.tju.simulation.file.Parameter;
@@ -474,11 +474,11 @@ public class Operator extends JPanel{
 				
 				controller.appendLog("debug","Set the cache in each base station...",logger);
 				
-				HashMap<Integer, List<MySingleContent>> initialMyHobbyMap = new HashMap<Integer, List<MySingleContent>>();
+				HashMap<Integer, List<SingleLocalHobby>> initialMyHobbyMap = new HashMap<Integer, List<SingleLocalHobby>>();
 				SameTypeWirelessNetwork BSs = controller.getWirelessNetworkGroup().BS;
 				for(int j =0; j< BSs.getAmount();j++){
 					WirelessNetwork wirelessNetwork = BSs.getNetwork(j);
-					List<MySingleContent> initialMyHobby = ContentService.copyMyHobby(wirelessNetwork.getContent().getContentList());
+					List<SingleLocalHobby> initialMyHobby = ContentService.copyMyHobby(wirelessNetwork.getContent().getContentList());
 					initialMyHobbyMap.put(wirelessNetwork.getNumber(), initialMyHobby);
 				}
 				

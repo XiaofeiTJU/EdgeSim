@@ -3,7 +3,7 @@ package cn.edu.tju.simulation.user;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-import cn.edu.tju.simulation.content.MyContent;
+import cn.edu.tju.simulation.content.LocalHobby;
 import cn.edu.tju.simulation.state.State;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
@@ -56,6 +56,6 @@ public class SimpleMobilityModel extends MobilityModel{
 		this.location = location;
 		this.distance = distance ;
 		this.wirelessNetwork = network;
-		this.content = new MyContent();
+		this.content = new LocalHobby();
 	}
 }

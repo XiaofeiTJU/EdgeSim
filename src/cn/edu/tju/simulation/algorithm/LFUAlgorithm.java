@@ -5,8 +5,8 @@ import java.util.List;
 
 import cn.edu.tju.simulation.content.CachingSingleContent;
 import cn.edu.tju.simulation.content.ContentService;
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
 /**
@@ -15,16 +15,16 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
  *
  */
 public class LFUAlgorithm implements RealTimeAlgorithm{
-	LinkedList<InitialSingleContent> watingCachingContent;
+	LinkedList<SingleContent> watingCachingContent;
 	
 	public LFUAlgorithm(){
-		watingCachingContent = new LinkedList<InitialSingleContent>();
+		watingCachingContent = new LinkedList<SingleContent>();
 	}
 	
-	public void setCache(WirelessNetwork requestedNetwork,MySingleContent requestContent){
+	public void setCache(WirelessNetwork requestedNetwork,SingleLocalHobby requestContent){
 		long remainingSize =  requestedNetwork.getCacheSize();
 		LinkedList<CachingSingleContent> cachingContentList =  requestedNetwork.getCacheContent();
-		List<MySingleContent> list =  requestedNetwork.getContent().getContentList();
+		List<SingleLocalHobby> list =  requestedNetwork.getContent().getContentList();
 		ContentService.sortMySingleContentByRequestedAmount(requestedNetwork.getContent().getContentList());
 		//request次数没有初始化
 		

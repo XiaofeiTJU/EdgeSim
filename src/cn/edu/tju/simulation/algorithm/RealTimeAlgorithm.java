@@ -1,6 +1,6 @@
 package cn.edu.tju.simulation.algorithm;
 
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
 /**
@@ -9,5 +9,5 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
  *
  */
 public interface RealTimeAlgorithm extends Algorithm{
-	public void setCache(WirelessNetwork network,MySingleContent requestContent);
+	public void setCache(WirelessNetwork network,SingleLocalHobby requestContent);
 }

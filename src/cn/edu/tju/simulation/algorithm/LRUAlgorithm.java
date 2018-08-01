@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.tju.simulation.content.CachingSingleContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
@@ -21,7 +21,7 @@ public class LRUAlgorithm implements RealTimeAlgorithm{
 	 * @param network
 	 * @param requestContent
 	 */
-	public void setCache(WirelessNetwork network,MySingleContent requestContent){
+	public void setCache(WirelessNetwork network,SingleLocalHobby requestContent){
 		long remainingSize = network.getRemainingCacheSize();
 		LinkedList<CachingSingleContent> cachingContentList =  network.getCacheContent();
 		CachingSingleContent includeContent = include(cachingContentList, requestContent);
@@ -57,11 +57,11 @@ public class LRUAlgorithm implements RealTimeAlgorithm{
 						
 						int sumOfPopularity = 0;
 						for(int j = 0 ; j <tempList.size();j++){
-							MySingleContent mySingleContentInNetwork = network.getContent().getMySingleContentByInitialSingleContent(tempList.get(j).getCachingSingleContent());
-							sumOfPopularity += mySingleContentInNetwork.getMyPopularity();							
+							SingleLocalHobby mySingleContentInNetwork = network.getContent().getSingleLocalHobbyBySingleContent(tempList.get(j).getSingleContent());
+							sumOfPopularity += mySingleContentInNetwork.getLocalHobbyValue();							
 						}
-						MySingleContent mySingleContentInNetwork = network.getContent().getMySingleContentByInitialSingleContent(requestContent.getSingleContent());
-						if(sumOfPopularity < mySingleContentInNetwork.getMyPopularity() ){
+						SingleLocalHobby mySingleContentInNetwork = network.getContent().getSingleLocalHobbyBySingleContent(requestContent.getSingleContent());
+						if(sumOfPopularity < mySingleContentInNetwork.getLocalHobbyValue() ){
 							network.getCacheContent().removeAll(tempList);
 						}
 				}
@@ -70,83 +70,15 @@ public class LRUAlgorithm implements RealTimeAlgorithm{
 		
 		
 			}
-
-		
-		
-//	System.out.println("");
-//			
-//			for(int i = 0 ; i<cachingContentList.size();i++){
-//				System.out.print(cachingContentList.get(i).getName()+" ");
-//			}
-//			
 			Controller.getInstance().appendLog("debug","Update Cache", null);
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		long remainingSize = network.getRemainingCacheSize();
-//		LinkedList<CachingSingleContent> cachingContentList =  network.getCacheContent();
-//		CachingSingleContent includeContent = include(cachingContentList, requestContent);
-//		if (requestContent.getSize()< 20480){
-//			System.out.println("请求的内容："+requestContent.getName());
-//			if(includeContent != null){
-//				//缓存中现在包含这个内容，把它放到最前面
-//				System.out.println("缓存中已经存在，替换到最前面");
-//				cachingContentList.remove(includeContent);
-//				cachingContentList.addFirst(includeContent);
-//			}else{
-//				if(remainingSize >= requestContent.getSize()){
-//					//能装下
-//					System.out.println("缓存中能装下，直接缓存");
-//
-//					cachingContentList.addFirst(new CachingSingleContent(requestContent.getSingleContent()));
-//				}else{
-//					//装不下，一个一个往外扔，直到装下为止
-//					if(network.getCacheSize() >= requestContent.getSize()){
-//						System.out.println("装不下，一个一个往外扔，直到装下为止");
-//						for (int i = cachingContentList.size() - 1; i >= 0; i--) {
-//							remainingSize += cachingContentList.get(i).getSize();
-//							System.out.println("剩余大小  "+remainingSize);
-//							System.out.println("内容大小 " + requestContent.getSize());
-//							if (network.removeCacheContent(i)) {
-//								if (remainingSize >= requestContent.getSize()) {
-//									cachingContentList.addFirst(new CachingSingleContent(requestContent.getSingleContent()));
-//									break;
-//								}
-//							}
-//						}
-//					}
-//				}
-//
-//			}
-//			
-//			for(int i = 0 ; i<cachingContentList.size();i++){
-//				System.out.print(cachingContentList.get(i).getName()+" ");
-//			}
-//			
-//			Controller.getInstance().appendLog("debug","Update Cache", null);
-//
-//			System.out.println("结束配置！！");
-//		}
 	}
 	
-	public CachingSingleContent include(List<CachingSingleContent> cacheContent , MySingleContent content){
+	public CachingSingleContent include(List<CachingSingleContent> cacheContent , SingleLocalHobby content){
 		Iterator<CachingSingleContent> it = cacheContent.iterator();
 		while(it.hasNext()){
 			CachingSingleContent csc = it.next();
 			if(csc.getName().equals(content.getName())){
+				System.out.println(cacheContent.contains(content));
 				return csc;
 			}
 		}

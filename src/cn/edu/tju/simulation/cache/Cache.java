@@ -3,17 +3,23 @@ package cn.edu.tju.simulation.cache;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import cn.edu.tju.simulation.content.CachingSingleContent;
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
+import cn.edu.tju.simulation.user.MobilityModel;
+import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
 /**
- * Cache abstract classes that contain all the properties and methods for caching.
- * When the base station inherits this class, we can configure the base station cache.
+ * Cache abstract classes that contain all the properties and methods for
+ * caching. When the base station inherits this class, we can configure the base
+ * station cache.
  * 
- * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin University 
+ * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin
+ *         University
  */
-public abstract class Cache{
+public abstract class Cache {
 	/**
 	 * Indicates whether there is a cache
 	 */
@@ -23,9 +29,11 @@ public abstract class Cache{
 	 */
 	public long cacheSize;
 	/**
-	 *A list of contents in the cache, each cached content is an object that contains the following properties: content; Status (being downloaded or not downloaded); Number of remaining time slices. 
+	 * A list of contents in the cache, each cached content is an object that
+	 * contains the following properties: content; Status (being downloaded or
+	 * not downloaded); Number of remaining time slices.
 	 **/
-	public LinkedList <CachingSingleContent> cacheContent;
+	public LinkedList<CachingSingleContent> cacheContent;
 	/**
 	 * The number of requests that the cache receives.
 	 */
@@ -34,84 +42,100 @@ public abstract class Cache{
 	 * The number of hit resources
 	 */
 	public int hitAmount;
-	
+
 	/**
-	 * Processing the request in the cache, returns true if 
-	 * the cache contains the requested content, or false if not included.
-	 * This method specifically refers to the user directly query the base station.
+	 * Processing the request in the cache, returns true if the cache contains
+	 * the requested content, or false if not included. This method specifically
+	 * refers to the user directly query the base station.
 	 */
-	public Boolean query(Query query , MySingleContent singleContent) {	
-		return query.query(singleContent);
-	}
-	
-	public Boolean removeCacheContent(InitialSingleContent sc){
-		Iterator<CachingSingleContent> it = this.cacheContent.iterator();
-		while(it.hasNext()){
-			CachingSingleContent csc = it.next();
-			if(csc.getCachingSingleContent().getName().equals(sc.getName())){
-				if(csc.canBeRemove()){
-					it.remove();
+	public boolean dealQuery(Object object, SingleLocalHobby singleContent) {
+		if (cacheContent != null) {
+			if (object instanceof WirelessNetwork) {
+				System.out.println("基站開始的请求");
+				if (cacheContent.contains(singleContent)) {
 					return true;
-				}else{
-//					System.out.println("他不让我删除！~~~~~~~~~~~~");
+				} else {
 					return false;
 				}
+			} else if (object instanceof MobilityModel) {
+				System.out.println("用戶開始的请求");
+				if (cacheContent.contains(singleContent)) {
+					return true;
+				} else {
+					return false;
+				}
+			}else{
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public Boolean removeCacheContent(SingleContent sc) {
+		Iterator<CachingSingleContent> it = this.cacheContent.iterator();
+		while (it.hasNext()) {
+			CachingSingleContent csc = it.next();
+			if (csc.getSingleContent().getName().equals(sc.getName())) {
+				it.remove();
+				return true;
 			}
 		}
 		return false;
 	}
-	
-	public Boolean removeCacheContent(int index){
-			this.cacheContent.remove(index);
-			return true;
+
+	public Boolean removeCacheContent(int index) {
+		this.cacheContent.remove(index);
+		return true;
 	}
-	
-	public Boolean addCacheContent(MySingleContent sc){
-			this.cacheContent.add(new CachingSingleContent(sc.getSingleContent()));
-			return true;
+
+	public Boolean addCacheContent(SingleLocalHobby sc) {
+		this.cacheContent.add(new CachingSingleContent(sc.getSingleContent()));
+		return true;
 	}
-	
-	public long getRemainingCacheSize(){
-		if(cacheContent.size() == 0){
+
+	public long getRemainingCacheSize() {
+		if (cacheContent.size() == 0) {
 			return this.cacheSize;
-		}else {
+		} else {
 			long remainingCachesize = this.cacheSize;
 			Iterator<CachingSingleContent> it = cacheContent.iterator();
-			while(it.hasNext()){
+			while (it.hasNext()) {
 				CachingSingleContent cachingSingleContent = it.next();
-					//正在被下载
-//					System.out.println("内容"+cachingSingleContent.getName()+"正在被下载~~~~~~~~~~  它的大小是："+cachingSingleContent.getSize());
-					remainingCachesize -= cachingSingleContent.getSize();
+				// 正在被下载
+				// System.out.println("内容"+cachingSingleContent.getName()+"正在被下载~~~~~~~~~~  它的大小是："+cachingSingleContent.getSize());
+				remainingCachesize -= cachingSingleContent.getSize();
 			}
 			return remainingCachesize;
 		}
 	}
-	
+
 	/**
 	 * A new request arrives and the number of requests is incremented by 1.
 	 */
-	public void addRequestAmount(){
+	public void addRequestAmount() {
 		cacheRequestAmount += 1;
-	}	
-	
+	}
+
 	/**
 	 * Initialize the number of requests and hits.
 	 */
-	public void resetAmountOfRequestAndHits(){
+	public void resetAmountOfRequestAndHits() {
 		this.cacheRequestAmount = 0;
 		this.hitAmount = 0;
 	}
-	
+
 	/**
 	 * The request is hit and the number of hits is incremented by 1.
 	 */
-	public void addHitAmount(){
+	public void addHitAmount() {
 		cacheRequestAmount += 1;
 		hitAmount += 1;
 	}
 
 	/**
 	 * See if this base station caontains a cache
+	 * 
 	 * @return True means there is a cache, or false means there is no cache.
 	 */
 	public Boolean getHasCache() {
@@ -121,7 +145,7 @@ public abstract class Cache{
 	public long getCacheSize() {
 		return cacheSize;
 	}
-	
+
 	public LinkedList<CachingSingleContent> getCacheContent() {
 		return cacheContent;
 	}
@@ -141,6 +165,5 @@ public abstract class Cache{
 	public void setCacheSize(long cacheSize) {
 		this.cacheSize = cacheSize;
 	}
-	
-	
+
 }

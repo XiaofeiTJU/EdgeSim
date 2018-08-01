@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MyContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.LocalHobby;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.data.Data;
 import cn.edu.tju.simulation.file.ContentReader;
 import cn.edu.tju.simulation.file.ParameterFileReader;
@@ -35,7 +35,7 @@ public class Controller {
 	/**
 	 * The original content, the user and base station's "area popularity" from the property is generated.
 	 */
-	private MyContent originalContent;
+	private LocalHobby originalContent;
 	/**
 	 * The collection of all wireless networks in the network system, which may contain various types of networks.
 	 */
@@ -130,28 +130,12 @@ public class Controller {
 		
 		logger.debug("Initialize the popularity according to power law distribution");
 		
-		this.originalContent = new MyContent();
-		List<InitialSingleContent> list = new ContentReader().read();
+		this.originalContent = new LocalHobby();
+		List<SingleContent> list = new ContentReader().read();
 		
-//		Iterator<InitialSingleContent> it = list.iterator();
-//		while(it.hasNext()){
-//			InitialSingleContent  isc = it.next();
-//			if(isc.getSize()<5120 || isc.getSize() > 500000){
-//				it.remove();
-//			}
-//		}
-		
-//		Random r = new Random();
-//		for(int i = 10000;i<20194;i++){
-//			InitialSingleContent ic = new InitialSingleContent(i);
-//			ic.setSize(r.nextInt(1204*5)+1);
-//			list.add(ic);
-//			
-//		}
-		
-		List<MySingleContent> temp = new ArrayList<MySingleContent>();
-		for (InitialSingleContent mySingleContent : list) {
-			temp.add(new MySingleContent(mySingleContent));
+		List<SingleLocalHobby> temp = new ArrayList<SingleLocalHobby>();
+		for (SingleContent mySingleContent : list) {
+			temp.add(new SingleLocalHobby(mySingleContent));
 		}
 		this.originalContent.setContentList(temp);
 	}
@@ -204,7 +188,7 @@ public class Controller {
 		this.wirelessNetworkGroup.BS.clear();
 	}
 	
-	public List<MySingleContent> getOriginalContentList(){
+	public List<SingleLocalHobby> getOriginalContentList(){
 		return this.originalContent.getContentList();
 	}
 
@@ -236,11 +220,11 @@ public class Controller {
 		return stateQueue;
 	}
 
-	public MyContent getOriginalContent() {
+	public LocalHobby getOriginalContent() {
 		return originalContent;
 	}
 
-	public void setOriginalContent(MyContent originalContent) {
+	public void setOriginalContent(LocalHobby originalContent) {
 		this.originalContent = originalContent;
 	}
 

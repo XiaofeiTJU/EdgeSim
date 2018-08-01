@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import cn.edu.tju.simulation.content.InitialSingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
 
 
 /**
@@ -40,7 +40,7 @@ public class ContentWriter {
 	        document.setXmlStandalone(true);  
 	        //创建Location根节点  
 	        Element rootElement = document.createElement("containt"); 
-	        List<InitialSingleContent> fileSizeList = new ContentReader().read();
+	        List<SingleContent> fileSizeList = new ContentReader().read();
 	        //创建CountryRegion节点  
 	        for(int i = 0;i<fileSizeList.size();i++){
 	            Element type = document.createElement("media");

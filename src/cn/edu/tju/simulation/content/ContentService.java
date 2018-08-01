@@ -19,18 +19,18 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
  * @author 李文凯
  */
 public class ContentService {
-	private List<InitialSingleContent> mediaList;
+	private List<SingleContent> mediaList;
 	/**
 	 * According to the download volume, the popularity of sorting..
 	 * @param mediaList Content collection
 	 */
 	
-	public static List<MySingleContent> sortByHobby(List<MySingleContent> mediaList) {
+	public static List<SingleLocalHobby> sortByHobby(List<SingleLocalHobby> mediaList) {
 		if (mediaList != null) {
-			Collections.sort(mediaList, new Comparator<MySingleContent>() {
-				public int compare(MySingleContent contentOne, MySingleContent contentTwo) {
-					 return contentOne.getMyPopularity() == contentTwo.getMyPopularity() ? 0 :    
-			                (contentOne.getMyPopularity() > contentTwo.getMyPopularity() ? -1 : 1); 
+			Collections.sort(mediaList, new Comparator<SingleLocalHobby>() {
+				public int compare(SingleLocalHobby contentOne, SingleLocalHobby contentTwo) {
+					 return contentOne.getLocalHobbyValue() == contentTwo.getLocalHobbyValue() ? 0 :    
+			                (contentOne.getLocalHobbyValue() > contentTwo.getLocalHobbyValue() ? -1 : 1); 
 				}
 			});
 		}
@@ -38,10 +38,10 @@ public class ContentService {
 		return mediaList;
 	}
 
-	public static List<MySingleContent> sortByInitialPopularity(List<MySingleContent> mediaList) {
+	public static List<SingleLocalHobby> sortByInitialPopularity(List<SingleLocalHobby> mediaList) {
 		if (mediaList != null) {
-			Collections.sort(mediaList, new Comparator<MySingleContent>() {
-				public int compare(MySingleContent contentOne, MySingleContent contentTwo) {
+			Collections.sort(mediaList, new Comparator<SingleLocalHobby>() {
+				public int compare(SingleLocalHobby contentOne, SingleLocalHobby contentTwo) {
 					 return contentOne.getSingleContent().getPopularity() == contentTwo.getSingleContent().getPopularity() ? 0 :    
 			                (contentOne.getSingleContent().getPopularity() > contentTwo.getSingleContent().getPopularity() ? -1 : 1); 
 				}
@@ -50,22 +50,22 @@ public class ContentService {
 		return mediaList;
 	}
 
-	public static List<MySingleContent> sortByAverageHobby(List<MySingleContent> mediaList) {
+	public static List<SingleLocalHobby> sortByAverageHobby(List<SingleLocalHobby> mediaList) {
 		if (mediaList != null) {
-			Collections.sort(mediaList, new Comparator<MySingleContent>() {
-				public int compare(MySingleContent contentOne, MySingleContent contentTwo) {
-					 return contentOne.getMyPopularity()/contentOne.getSize() == contentTwo.getMyPopularity()/contentTwo.getSize() ? 0 :    
-			                (contentOne.getMyPopularity()/contentOne.getSize() > contentTwo.getMyPopularity()/contentTwo.getSize() ? -1 : 1); 
+			Collections.sort(mediaList, new Comparator<SingleLocalHobby>() {
+				public int compare(SingleLocalHobby contentOne, SingleLocalHobby contentTwo) {
+					 return contentOne.getLocalHobbyValue()/contentOne.getSize() == contentTwo.getLocalHobbyValue()/contentTwo.getSize() ? 0 :    
+			                (contentOne.getLocalHobbyValue()/contentOne.getSize() > contentTwo.getLocalHobbyValue()/contentTwo.getSize() ? -1 : 1); 
 				}
 			});
 		}
 		return mediaList;
 	}
 	
-	public static List<InitialSingleContent> sortByRequestedAmount(List<InitialSingleContent> mediaList) {
+	public static List<SingleContent> sortByRequestedAmount(List<SingleContent> mediaList) {
 		if (mediaList != null) {
-			Collections.sort(mediaList, new Comparator<InitialSingleContent>() {
-				public int compare(InitialSingleContent contentOne, InitialSingleContent contentTwo) {
+			Collections.sort(mediaList, new Comparator<SingleContent>() {
+				public int compare(SingleContent contentOne, SingleContent contentTwo) {
 					 return contentOne.getRequestAmount() == contentTwo.getRequestAmount() ? 0 :    
 			                (contentOne.getRequestAmount() > contentTwo.getRequestAmount() ? -1 : 1); 
 				}
@@ -78,8 +78,8 @@ public class ContentService {
 		if (mediaList != null) {
 			Collections.sort(mediaList, new Comparator<CachingSingleContent>() {
 				public int compare(CachingSingleContent contentOne, CachingSingleContent contentTwo) {
-					 return contentOne.getCachingSingleContent().getPopularity() == contentTwo.getCachingSingleContent().getPopularity() ? 0 :    
-			                (contentOne.getCachingSingleContent().getPopularity() > contentTwo.getCachingSingleContent().getPopularity() ? -1 : 1); 
+					 return contentOne.getSingleContent().getPopularity() == contentTwo.getSingleContent().getPopularity() ? 0 :    
+			                (contentOne.getSingleContent().getPopularity() > contentTwo.getSingleContent().getPopularity() ? -1 : 1); 
 				}
 			});
 		}
@@ -90,18 +90,18 @@ public class ContentService {
 		if (mediaList != null) {
 			Collections.sort(mediaList, new Comparator<CachingSingleContent>() {
 				public int compare(CachingSingleContent contentOne, CachingSingleContent contentTwo) {
-					 return contentOne.getCachingSingleContent().getRequestAmount() == contentTwo.getCachingSingleContent().getRequestAmount() ? 0 :    
-			                (contentOne.getCachingSingleContent().getRequestAmount() > contentTwo.getCachingSingleContent().getRequestAmount() ? -1 : 1); 
+					 return contentOne.getSingleContent().getRequestAmount() == contentTwo.getSingleContent().getRequestAmount() ? 0 :    
+			                (contentOne.getSingleContent().getRequestAmount() > contentTwo.getSingleContent().getRequestAmount() ? -1 : 1); 
 				}
 			});
 		}
 		return mediaList;
 	}
 	
-	public static List<MySingleContent> sortMySingleContentByRequestedAmount(List<MySingleContent> list) {
+	public static List<SingleLocalHobby> sortMySingleContentByRequestedAmount(List<SingleLocalHobby> list) {
 		if (list != null) {
-			Collections.sort(list, new Comparator<MySingleContent>() {
-				public int compare(MySingleContent contentOne, MySingleContent contentTwo) {
+			Collections.sort(list, new Comparator<SingleLocalHobby>() {
+				public int compare(SingleLocalHobby contentOne, SingleLocalHobby contentTwo) {
 					 return contentOne.getSingleContent().getRequestAmount() == contentTwo.getSingleContent().getRequestAmount() ? 0 :    
 			                (contentOne.getSingleContent().getRequestAmount() > contentTwo.getSingleContent().getRequestAmount() ? -1 : 1); 
 				}
@@ -114,7 +114,7 @@ public class ContentService {
     /**
      * Initialize the popularity according to power law distribution
      */
-    public static List<MySingleContent> initialPopularity(List<MySingleContent> noPopularityMediaList){
+    public static List<SingleLocalHobby> initialPopularity(List<SingleLocalHobby> noPopularityMediaList){
     	ZipfDistribution zd = new ZipfDistribution(5000, 1);
     	int [] popularity = zd.sample(noPopularityMediaList.size());
 
@@ -126,7 +126,7 @@ public class ContentService {
     }
     
     //可优化
-    public static void resetMyHobby(HashMap<Integer, List<MySingleContent>> initialPopularity, SameTypeWirelessNetwork BSs){
+    public static void resetMyHobby(HashMap<Integer, List<SingleLocalHobby>> initialPopularity, SameTypeWirelessNetwork BSs){
     	Iterator<Integer> it = initialPopularity.keySet().iterator();
 		while(it.hasNext()){
 			int key = it.next();
@@ -135,11 +135,11 @@ public class ContentService {
 					WirelessNetwork wn = BSs.getNetwork(i);
 					for(int j = 0;j<initialPopularity.get(key).size();j++){
 						
-						Iterator<MySingleContent> mIt =wn.getContent().getContentList().iterator();
+						Iterator<SingleLocalHobby> mIt =wn.getContent().getContentList().iterator();
 						while(mIt.hasNext()){
-							MySingleContent sc = mIt.next();
+							SingleLocalHobby sc = mIt.next();
 							if(sc.getName().equals(initialPopularity.get(key).get(j).getName())){
-								sc.setMyPopularity(initialPopularity.get(key).get(j).getMyPopularity());
+								sc.setLocalHobbyValue(initialPopularity.get(key).get(j).getLocalHobbyValue());
 							}
 						}
 					}
@@ -149,13 +149,13 @@ public class ContentService {
 		}
     }
     
-    public static List<InitialSingleContent> initialSize(List<InitialSingleContent> noPopularityMediaList){
+    public static List<SingleContent> initialSize(List<SingleContent> noPopularityMediaList){
 //    	double probability [] = {0.005,0.018,0.047,0.466,0.995,1};
     	double probability [] = {0.095,0.218,0.317,0.466,0.805,1};
 
     	Random r = new Random();
     	
-    	for (InitialSingleContent media : noPopularityMediaList) {
+    	for (SingleContent media : noPopularityMediaList) {
         	int size = 0;
         	double temp  = Math.random();
         	for(int i = 0 ;i <probability.length; i++){
@@ -177,10 +177,10 @@ public class ContentService {
    
     }
     
-    public static List<MySingleContent> copyMyHobby(List<MySingleContent> contentList){
-		List<MySingleContent> myContentList = new ArrayList<MySingleContent>();
-		for (MySingleContent content : contentList) {
-			MySingleContent mContent = new MySingleContent(content.getSingleContent(),content.getMyPopularity());
+    public static List<SingleLocalHobby> copyMyHobby(List<SingleLocalHobby> contentList){
+		List<SingleLocalHobby> myContentList = new ArrayList<SingleLocalHobby>();
+		for (SingleLocalHobby content : contentList) {
+			SingleLocalHobby mContent = new SingleLocalHobby(content.getSingleContent(),content.getLocalHobbyValue());
 			myContentList.add(mContent);
 		}
 		return myContentList;
@@ -194,12 +194,11 @@ public class ContentService {
     	return (float)B/1024/1024;
     }
     
-	public List<InitialSingleContent> getMediaList() {
+	public List<SingleContent> getMediaList() {
 		return mediaList;
 	}
 
-	public void setMediaList(List<InitialSingleContent> mediaList) {
+	public void setMediaList(List<SingleContent> mediaList) {
 		this.mediaList = mediaList;
 	}
-
 }

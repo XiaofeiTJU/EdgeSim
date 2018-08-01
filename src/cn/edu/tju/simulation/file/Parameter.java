@@ -65,10 +65,6 @@ public class Parameter {
 	 * The maximum value of the default user's fluctuation range.
 	 */
 	public static float UserMaxWaveInterval;
-	/**
-	 * 
-	 */
-	public static int ContentSizePerTimeSlice;
 
 	
 	public void setUSER_TO_BS_DELAY(String uSER_TO_BS_DELAY) {
@@ -119,9 +115,5 @@ public class Parameter {
 	public void setUserMaxWaveInterval(String userMaxWaveInterval) {
 		UserMaxWaveInterval = Float.parseFloat(userMaxWaveInterval);
 	}
-	public static void setContentSizePerTimeSlice(String contentSizePerTimeSlice) {
-		ContentSizePerTimeSlice = Integer.parseInt(contentSizePerTimeSlice);
-	}	
-	
 	
 }

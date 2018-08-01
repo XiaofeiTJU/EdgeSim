@@ -21,8 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 
 import cn.edu.tju.simulation.content.ContentService;
-import cn.edu.tju.simulation.content.InitialSingleContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.file.ContentWriter;
 import cn.edu.tju.simulation.handler.Pretreatment;
@@ -44,7 +44,7 @@ public class ViewContent extends JFrame{
 	private JButton save;
 	private Vector<Vector<String>> tableColumn = new Vector<Vector<String>>();// Table元素向量
 	private Vector<String> columnNames = new Vector<String>();// Table列名
-	private List<MySingleContent> mediaList;
+	private List<SingleLocalHobby> mediaList;
 	private ViewContent content;
 	private JFrame rootFrame;
 	private Controller controller;
@@ -131,7 +131,7 @@ public class ViewContent extends JFrame{
 			}
 			{
 				long sum = 0 ;
-				for (MySingleContent singleContent : mediaList) {
+				for (SingleLocalHobby singleContent : mediaList) {
 					sum += singleContent.getSize();
 				}
 				sumOfSize = new JLabel("The sum of the file sizes of all content : " + ContentService.unitConversion(sum)+" GB");
@@ -164,7 +164,7 @@ public class ViewContent extends JFrame{
 			mediaList.clear();
 			while(it.hasNext()){
 				Vector<String> vector = it.next();
-				mediaList.add(new MySingleContent( new InitialSingleContent(vector.get(0), Integer.parseInt(vector.get(2)),Integer.parseInt(vector.get(1)))));
+				mediaList.add(new SingleLocalHobby( new SingleContent(vector.get(0), Integer.parseInt(vector.get(2)),Integer.parseInt(vector.get(1)))));
 			}
 			if(controller.hasUsers()){
 				Pretreatment.process();

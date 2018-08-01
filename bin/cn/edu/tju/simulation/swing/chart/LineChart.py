@@ -28,7 +28,7 @@ with open(DATA_FILE_PATH, encoding='utf-8') as ResultData_Reader:
             for data in line_data:
                 data = data.split(",")
                 if len(data) == 4:
-                    algorithm_data_list[-1].Data.append(float(data[1]))
+                    algorithm_data_list[-1].Data.append(float(data[1])*100)
                     
 '''
 line chart
@@ -41,7 +41,7 @@ figure, ax = plt.subplots(num="HIT RATE", figsize=figsize)
 set the scale
 '''
 #set the coordinate range of value
-plt.ylim(0, 0.2)
+plt.ylim(0, 20)
 plt.xlim(0, len(algorithm_data_list[-1].Data)+1)
 #set the scale
 #set the x major scale label to a multiple of 5
@@ -54,11 +54,11 @@ xminorLocator = MultipleLocator(1)
 ax.xaxis.set_major_locator(xmajorLocator)
 ax.xaxis.set_major_formatter(xmajorFormatter)
 #Set the y-axis main scale label to a multiple of 0.05%
-ymajorLocator = MultipleLocator(0.05)
+ymajorLocator = MultipleLocator(5)
 #Set the format of the y-axis label text
 ymajorFormatter = FormatStrFormatter('%.2f%%')
 #Set this y-axis minor tick label to a multiple of 0.2
-yminorLocator = MultipleLocator(0.01)
+yminorLocator = MultipleLocator(1)
 #Load y-axis settings
 ax.yaxis.set_major_locator(ymajorLocator)
 ax.yaxis.set_major_formatter(ymajorFormatter)

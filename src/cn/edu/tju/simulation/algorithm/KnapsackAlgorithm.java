@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.wirelessnetwork.SameTypeWirelessNetwork;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
@@ -33,16 +33,16 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 		for (int i = 0; i < BSs.getAmount(); i++) {
 			WirelessNetwork network = BSs.getNetwork(i);
 			int size = (int)(network.getCacheSize()/1024);
-			List<MySingleContent> canBeCachedContent= network.getCanBeCachedContent();
-			Iterator<MySingleContent> it = canBeCachedContent.iterator();			
+			List<SingleLocalHobby> canBeCachedContent= network.getCanBeCachedContent();
+			Iterator<SingleLocalHobby> it = canBeCachedContent.iterator();			
 
 			
 			List<Integer> mediaAmount = new ArrayList<Integer>();
 			List<Integer> mediaSize = new ArrayList<Integer>();
 
 			while (it.hasNext()) {
-				MySingleContent sc = it.next();
-				mediaAmount.add(sc.getMyPopularity());
+				SingleLocalHobby sc = it.next();
+				mediaAmount.add(sc.getLocalHobbyValue());
 				int temp =(int) Math.ceil(sc.getSize()/1024);
 				mediaSize.add(temp);
 			}
@@ -60,7 +60,7 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 				
 				int maxPopularity = 0;
 				for(int m = 0 ;m<network.getCacheContent().size();m++){
-					maxPopularity += network.getCacheContent().get(m).getCachingSingleContent().getPopularity();
+					maxPopularity += network.getCacheContent().get(m).getSingleContent().getPopularity();
 				}
 				controller.appendLog("debug","The maximum cache popularity£º " + maxPopularity+"  Cached content number£º",null);
 				for(int n = 0 ; n<network.getCacheContent().size();n++){
@@ -69,33 +69,6 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 			} else {
 				System.out.println("No Cache");
 			}
-			
-			
-			
-			
-//			
-//			Integer[] mediaAmounts = mediaAmount.toArray(new Integer[mediaAmount.size()]);
-//			Long[] mediaSizes = mediaSize.toArray(new Long [mediaSize.size()]);
-//
-//			// If there is Cache
-//			if (network.getHasCache()) {
-//				List<Integer> optimal = knapsackAlgorithm(size,mediaSizes, mediaAmounts);
-//				
-//				for (int j = 0; j < optimal.size(); j++) {
-//					network.addCacheContent(canBeCachedContent.get(optimal.get(j) - 1));
-//				}
-//				
-//				int maxPopularity = 0;
-//				for(int m = 0 ;m<network.getCacheContent().size();m++){
-//					maxPopularity += network.getCacheContent().get(m).getCachingSingleContent().getAmount();
-//				}
-//				controller.appendLog("debug","The maximum cache popularity£º " + maxPopularity+"  Cached content number£º",null);
-//				for(int n = 0 ; n<network.getCacheContent().size();n++){
-//					controller.appendLog("debug",network.getCacheContent().get(n).getName()+"",null);
-//				}	
-//			} else {
-//				System.out.println("No Cache");
-//			}
 		}
 	}
 

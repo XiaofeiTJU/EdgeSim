@@ -6,9 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import cn.edu.tju.simulation.cache.Query;
-import cn.edu.tju.simulation.content.CachingSingleContent;
-import cn.edu.tju.simulation.content.MyContent;
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.LocalHobby;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.file.Parameter;
 import cn.edu.tju.simulation.state.State;
@@ -40,11 +39,10 @@ public abstract class MobilityModel implements Query{
 	/**
 	 * The current user's own popularity
 	 */
-	protected MyContent content;
-	
-	protected List<Double> requestSingleContentProbabilityDistribution;
-	
+	protected LocalHobby content;
+		
 	protected int sumOfPopularity = 0;
+	
 	protected List<Integer> ratio;
 	
 	
@@ -114,53 +112,25 @@ public abstract class MobilityModel implements Query{
 		
 		sumOfPopularity = 0;//The total popularity
 		//Calculate the total popularity
-		Iterator<MySingleContent> it = this.content.getContentList().iterator();
+		Iterator<SingleLocalHobby> it = this.content.getContentList().iterator();
 		
 		while(it.hasNext()){
-			sumOfPopularity += it.next().getMyPopularity();
+			sumOfPopularity += it.next().getLocalHobbyValue();
 		}
 		
 		for (int j =0;j<this.content.getContentList().size();j++) {
-			MySingleContent singleContent = content.getContentList().get(j);
+			SingleLocalHobby singleContent = content.getContentList().get(j);
 			if(j!=0){
-				ratio.add((singleContent.getMyPopularity()+ratio.get(j-1)));
+				ratio.add((singleContent.getLocalHobbyValue()+ratio.get(j-1)));
 			}else if(j==0){
-				ratio.add(singleContent.getMyPopularity());
+				ratio.add(singleContent.getLocalHobbyValue());
 			}
 		}
 		
 	}
 	
-	public Boolean query(MySingleContent singleContent){
-		Boolean hit = false;
-		if (this.wirelessNetwork.getCacheContent() != null) {
-			Iterator<CachingSingleContent> it = this.wirelessNetwork.getCacheContent().iterator();
-			while(it.hasNext()){
-				CachingSingleContent cachingSingleContent = it.next();
-				if(cachingSingleContent.getName().equals(singleContent.getName())){
-					hit = true;
-					if(cachingSingleContent.isDownLoad()){
-						if(!cachingSingleContent.getTimeSlotNumberMapUser().keySet().contains(this)){
-//							System.out.println("之前就有用户在下载，但现在是新的用户请求，所以要加到表里");
-							cachingSingleContent.addNewUserToTimeSlotNumberMap(this, singleContent.getTimeSlotNumber());
-							this.wirelessNetwork.addHitAmount();
-						}else{
-//							System.out.println("这是一个用户维持的请求，不计数");
-						}
-					}else{
-						this.wirelessNetwork.addHitAmount();
-						cachingSingleContent.addNewUserToTimeSlotNumberMap(this, singleContent.getTimeSlotNumber());
-					}
-					return true;
-				}
-			}
-			if(!hit){
-				this.wirelessNetwork.addRequestAmount();
-			}
-			return false;
-		}else{
-			return false;
-		}
+	public Boolean query(SingleLocalHobby singleContent){
+		return this.wirelessNetwork.dealQuery(this, singleContent);
 	}
 	
 	public int getID() {
@@ -196,23 +166,13 @@ public abstract class MobilityModel implements Query{
 	}
 
 
-	public MyContent getContent() {
+	public LocalHobby getContent() {
 		return content;
 	}
 
-	public void setContent(MyContent content) {
+	public void setContent(LocalHobby content) {
 		this.content = content;
 	}
 
-	public List<Double> getRequestSingleContentProbabilityDistribution() {
-		return requestSingleContentProbabilityDistribution;
-	}
-
-	public void setRequestSingleContentProbabilityDistribution(
-			List<Double> requestSingleContentProbabilityDistribution) {
-		this.requestSingleContentProbabilityDistribution = requestSingleContentProbabilityDistribution;
-	}
-	
-	
 		
 }

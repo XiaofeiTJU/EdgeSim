@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import cn.edu.tju.simulation.content.MySingleContent;
+import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
@@ -40,17 +40,17 @@ public class QLearning implements OneTimeAlgorithm{
 		for(int j=0;j<Controller.getInstance().getWirelessNetworkGroup().BS.getAmount();j++){
 			WirelessNetwork network = Controller.getInstance().getWirelessNetworkGroup().BS.getNetwork(j);
 			long size = network.getCacheSize();
-			List<MySingleContent> canBeCachedContent = network.getContent().getContentList();
+			List<SingleLocalHobby> canBeCachedContent = network.getContent().getContentList();
 			
 			
 			int sumOfPopularity = 0;
-			for (MySingleContent singleContent : canBeCachedContent) {
-				sumOfPopularity = sumOfPopularity+singleContent.getMyPopularity();
+			for (SingleLocalHobby singleContent : canBeCachedContent) {
+				sumOfPopularity = sumOfPopularity+singleContent.getLocalHobbyValue();
 			}
 			
-			LinkedHashMap<MySingleContent,Float> probabilityDistribution = new LinkedHashMap<MySingleContent, Float>();
-			for (MySingleContent singleContent : canBeCachedContent) {
-				probabilityDistribution.put(singleContent, (float)singleContent.getMyPopularity()/(float)sumOfPopularity);
+			LinkedHashMap<SingleLocalHobby,Float> probabilityDistribution = new LinkedHashMap<SingleLocalHobby, Float>();
+			for (SingleLocalHobby singleContent : canBeCachedContent) {
+				probabilityDistribution.put(singleContent, (float)singleContent.getLocalHobbyValue()/(float)sumOfPopularity);
 			}
 
 			
@@ -99,10 +99,10 @@ public class QLearning implements OneTimeAlgorithm{
 	}
 	
 	class reward {
-		public MySingleContent singleContent;
+		public SingleLocalHobby singleContent;
 		public float reward;
 
-		public reward(MySingleContent mySingleContent, float reward) {
+		public reward(SingleLocalHobby mySingleContent, float reward) {
 			this.singleContent = mySingleContent;
 			this.reward = reward;
 		}

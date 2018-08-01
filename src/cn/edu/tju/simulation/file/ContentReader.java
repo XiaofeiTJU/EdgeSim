@@ -9,14 +9,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.math3.distribution.ZipfDistribution;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import cn.edu.tju.simulation.content.InitialSingleContent;
+import cn.edu.tju.simulation.content.SingleContent;
 
 /**
  * Read XML file, initialize multimedia
@@ -28,18 +24,17 @@ public class ContentReader {
 	 * Read content.xml
 	 * @return
 	 */
-	public List<InitialSingleContent> read() {
-		List<InitialSingleContent> mediaList = new ArrayList<InitialSingleContent>();
-		InitialSingleContent tempMedia = null;
+	public List<SingleContent> read() {
+		List<SingleContent> mediaList = new ArrayList<SingleContent>();
+		SingleContent tempMedia = null;
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse("data/CONTAINT.xml");
-			NodeList containt = document.getElementsByTagName("media");
 			
 //			for (int i = 0; i < containt.getLength(); i++) {
 			for (int i = 0; i < 3000; i++) {
-				tempMedia = new InitialSingleContent();
+				tempMedia = new SingleContent();
 				tempMedia.setName(document.getElementsByTagName("name").item(i).getFirstChild().getNodeValue());
 				String size =  document.getElementsByTagName("size").item(i).getFirstChild().getNodeValue();
 				if(size.equals("0")){
