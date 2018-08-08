@@ -18,7 +18,7 @@ Besides, parameters are supported by real data sets.
 
 ----
 ## Installation
-First of all, you may need to pre-install JDK10. If you want to generate a professional version of the results chart via the emulator directly, you may need to pre-install the python environment and download the matplot and numpy.
+First of all, you may need to pre-install JDK10. If you want to generate a professional version of the results chart via the emulator directly, you may need to pre-install the python environment and download the matplotlib and numpy.
 ```python
 pip install numpy
 ```
