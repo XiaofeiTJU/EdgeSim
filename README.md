@@ -1,5 +1,4 @@
-<p align="center"><img src="https://github.com/XiaofeiTJU/EdgeSim/blob/master/images/Logo.png"></p>
-[![Build Status](https://travis-ci.com/XiaofeiTJU/EdgeSim.svg?token=py9hxdKvrcD4MPz5n1nH&branch=master)]
+<p align="center"><img src="https://github.com/XiaofeiTJU/EdgeSim/blob/master/images/Logo.png"></p>![Build Status](https://travis-ci.com/XiaofeiTJU/EdgeSim.svg?token=py9hxdKvrcD4MPz5n1nH&branch=master)
 
 ----
 ## About EdgeSim
