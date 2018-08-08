@@ -2,9 +2,3 @@ language: java
 
 jdk:
   - oraclejdk10
-  
-branches:
-  only:
-    - mybranch
-script: EdgeSim.java
-    
