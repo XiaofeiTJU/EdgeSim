@@ -31,3 +31,4 @@ Welcome everyone to perfect this system, if you have any questions or ideas, ple
 
 ----
 ## License
+Mock.js is available under the terms of [the MIT License](https://github.com/XiaofeiTJU/EdgeSim/blob/master/LICENSE).
