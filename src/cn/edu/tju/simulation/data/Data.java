@@ -18,33 +18,29 @@ public class Data {
 	/**
 	 * Save time
 	 */
-	private int saveTime;
+	private double latency;
 	/**
 	 * Save traffic
 	 */
-	private long saveTraffic;
+	private long Traffic;
 
 	public Data(int times){
 		this.timeSlice = times;
-		this.saveTime = 0;
-		this.saveTraffic = 0;
+		this.latency = 0;
+		this.Traffic = 0;
 
 	}
 	
-	public void addSaveTraffic(long saveTraffic){
-		this.saveTraffic += saveTraffic;
+	public void addTraffic(long saveTraffic){
+		this.Traffic += saveTraffic;
 	}
 	
-	public void reduceSaveTime(int reduceTime){
-		this.saveTime -= reduceTime;
-	}
-	
-	public void addSaveTime(int saveTime){
-		this.saveTime += saveTime;
+	public void addLatency(double latency){
+		this.latency += latency;
 	}
 	
 	public long getSaveTraffic() {
-		return saveTraffic;
+		return Traffic;
 	}
 	
 	public float getHitRate() {
@@ -55,8 +51,12 @@ public class Data {
 		return timeSlice;
 	}
 
-	public int getSaveTime() {
-		return saveTime;
+	public double getLatency() {
+		return latency;
+	}
+
+	public void setLatency(double latency) {
+		this.latency = latency;
 	}
 
 	public void setHitRate(float hitRate) {
@@ -67,12 +67,8 @@ public class Data {
 		this.timeSlice = timeSlice;
 	}
 
-	public void setSaveTime(int saveTime) {
-		this.saveTime = saveTime;
-	}
-
-	public void setSaveTraffic(long saveTraffic) {
-		this.saveTraffic = saveTraffic;
+	public void setTraffic(long saveTraffic) {
+		this.Traffic = saveTraffic;
 	}
 
 	

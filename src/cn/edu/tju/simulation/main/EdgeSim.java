@@ -2,6 +2,7 @@ package cn.edu.tju.simulation.main;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -110,7 +111,11 @@ public class EdgeSim extends JFrame {
 			// Initialize main frame
 			mainFrame = new JFrame();
 			mainFrame.setTitle("EdgeSim");
-			mainFrame.setBounds(200, 200, 1400, 1050);
+			mainFrame.setBounds(250, 0, 1400, 1050);
+			
+			mainFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
+
+			
 			// mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); .
 			mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			ImageIcon icon = new ImageIcon("images/icon.png"); // xxx代表图片存放路径，2.png图片名称及格式
@@ -166,20 +171,11 @@ public class EdgeSim extends JFrame {
 			}
 		}
 
-		public void windowClosed(WindowEvent e) {
-		}
-
-		public void windowIconified(WindowEvent e) {
-		}
-
-		public void windowDeiconified(WindowEvent e) {
-		}
-
-		public void windowActivated(WindowEvent e) {
-		}
-
-		public void windowDeactivated(WindowEvent e) {
-		}
+		public void windowClosed(WindowEvent e) {}
+		public void windowIconified(WindowEvent e) {}
+		public void windowDeiconified(WindowEvent e) {}
+		public void windowActivated(WindowEvent e) {}
+		public void windowDeactivated(WindowEvent e) {}
 
 	}
 

@@ -34,6 +34,7 @@ import cn.edu.tju.simulation.file.RandomBSReader;
 import cn.edu.tju.simulation.file.ResultDateWiriter;
 import cn.edu.tju.simulation.handler.Pretreatment;
 import cn.edu.tju.simulation.handler.RequestHandler;
+import cn.edu.tju.simulation.swing.chart.DelayLineChart;
 import cn.edu.tju.simulation.swing.chart.PythonInterpreter;
 import cn.edu.tju.simulation.swing.chart.TimeLineChart;
 import cn.edu.tju.simulation.tool.ToolKit;
@@ -249,6 +250,7 @@ public class Operator extends JPanel{
 					}
 				}else if(chartType.getSelectedItem().toString().equals("Java")) {
 					new TimeLineChart().draw();
+					new DelayLineChart().draw();
 				}
 			}
 		}
@@ -473,25 +475,15 @@ public class Operator extends JPanel{
 				controller.getResultDataList().clear();	
 				
 				controller.appendLog("debug","Set the cache in each base station...",logger);
-				
+	
 				HashMap<Integer, List<SingleLocalHobby>> initialMyHobbyMap = new HashMap<Integer, List<SingleLocalHobby>>();
 				SameTypeWirelessNetwork BSs = controller.getWirelessNetworkGroup().BS;
 				for(int j =0; j< BSs.getAmount();j++){
 					WirelessNetwork wirelessNetwork = BSs.getNetwork(j);
 					List<SingleLocalHobby> initialMyHobby = ContentService.copyMyHobby(wirelessNetwork.getContent().getContentList());
 					initialMyHobbyMap.put(wirelessNetwork.getNumber(), initialMyHobby);
-				}
-				
-//				System.out.println("初始化以前的流行度分布");
-//				Iterator<Integer> itt = initialPopularity.keySet().iterator();
-//				while(itt.hasNext()){
-//					int key = itt.next();
-//					List<SingleContent> mediaOfNet = initialPopularity.get(key);
-//					System.out.println("网络"+key+"的流行度分布");
-//					for (SingleContent media : mediaOfNet) {
-//						System.out.println(media.getName()+"的流行度是:"+media.getAmount());
-//					}
-//				}
+				}				
+
 				
 				controller.getResultDataList().clear();
 				RequestHandler.ndMap .clear();
@@ -499,97 +491,35 @@ public class Operator extends JPanel{
 				if (knapsackAlgorithm.isSelected()) {
 					algorithmSelected = true;
 					controller.getWirelessNetworkGroup().clearAllCache();
+					controller.getRequestHandler().processRequest(new KnapsackAlgorithm(), knapsackAlgorithm.getText(), (Integer)(timeSlices.getSelectedItem()));
+				}				
 
-					for (int i = 0; i < (Integer) (timeSlices.getSelectedItem()); i++) {
-						controller.appendLog("debug","-------------------------------------------------------------------------------------------One day-----------------------------------------------------------------------------------------------------------------------------------",null);
-						controller.appendLog("debug","------------------------------------------------------------------------------------Knapsack Algorithm-------------------------------------------------------------------------------------------------------------------------------------",null);
-						new KnapsackAlgorithm().setCache();
-						ToolKit.printCache(controller);
-						process(knapsackAlgorithm.getText(), i);
-					}
-				}
-				
-//				System.out.println("背包.运行完后的流行度分布");
-//				for(int i =0 ;i<controller.getWirelessNetworkGroup().getBSAmount();i++){
-//					WirelessNetwork networks = controller.getWirelessNetworkGroup().BS.getNetwork(i);
-//					List<SingleContent> medias = networks.getContent().getContentList();
-//					System.out.println("网络"+networks.getNumber()+"的流行度分布");
-//					for (SingleContent media : medias) {
-//						System.out.println(media.getName()+"的流行度是:"+media.getAmount());
-//					}
-//				}
-//				
 				if(greedyAlgorithm.isSelected()) {
-					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					algorithmSelected = true;
+					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					controller.getWirelessNetworkGroup().clearAllCache();
-
-					for(int i=0;i<(Integer)(timeSlices.getSelectedItem());i++){
-						System.out.println("__________________时间片"+(i+1)+"____________________________");
-						controller.appendLog("debug","-------------------------------------------------------------------------------------Greedy Algorithm-----------------------------------------------------------------------------------------------------------------------------------", null);
-						
-						new GreedyAlgorithm().setCache();
-						ToolKit.printCache(controller);
-						process(greedyAlgorithm.getText(),i);	
-					}	
+					controller.getRequestHandler().processRequest(new GreedyAlgorithm(), greedyAlgorithm.getText(), (Integer)(timeSlices.getSelectedItem()));
 				}
-				
-//				System.out.println("贪心运行完之后，运行完后的流行度分布");
-//				for(int i =0 ;i<controller.getWirelessNetworkGroup().getBSAmount();i++){
-//					WirelessNetwork networks = controller.getWirelessNetworkGroup().BS.getNetwork(i);
-//					List<SingleContent> medias = networks.getContent().getContentList();
-//					System.out.println("网络"+networks.getNumber()+"的流行度分布");
-//					for (SingleContent media : medias) {
-//						System.out.println(media.getName()+"的流行度是:"+media.getAmount());
-//					}
-//				}
 				
 				if(qLearningAlgotirhm.isSelected()){
-					QLearning q = new QLearning();
-					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					algorithmSelected = true;
+					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					controller.getWirelessNetworkGroup().clearAllCache();
-
-
-					for(int i=0;i<(Integer)(timeSlices.getSelectedItem());i++){
-						controller.appendLog("debug","-------------------------------------------------------------------------------------Q-Learning Algorithm-----------------------------------------------------------------------------------------------------------------------------------", null);
-						q.setGamma(0.8f);
-						q.setCache();
-						ToolKit.printCache(controller);
-						process(qLearningAlgotirhm.getText(), i);
-						
-					}
+					controller.getRequestHandler().processRequest(new QLearning(), qLearningAlgotirhm.getText(), (Integer)(timeSlices.getSelectedItem()));
 				}
 				
 				if(lruAlgorithm.isSelected()){
-					LRUAlgorithm lru = new LRUAlgorithm();
-					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					algorithmSelected = true;
+					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					controller.getWirelessNetworkGroup().clearAllCache();
-
-
-					for(int i=0;i<(Integer)(timeSlices.getSelectedItem());i++){						
-						controller.appendLog(null,"-------------------------------------------------------------------------------------LRU Algorithm-----------------------------------------------------------------------------------------------------------------------------------", null);
-						ToolKit.printCache(controller);
-						controller.appendLog("debug","Concentrate on the request...",logger);
-						controller.getRequestHandler().processRequestRealTime(lru,"LRU", i);
-					}
+					controller.getRequestHandler().processRequest(new LRUAlgorithm(), lruAlgorithm.getText(), (Integer)(timeSlices.getSelectedItem()));
 				}
 				
-				
 				if(lfuAlgorithm.isSelected()){
-					LFUAlgorithm lfu = new LFUAlgorithm();
-					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					algorithmSelected = true;
+					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					controller.getWirelessNetworkGroup().clearAllCache();
-
-
-					for(int i=0;i<(Integer)(timeSlices.getSelectedItem());i++){
-						controller.appendLog(null,"-------------------------------------------------------------------------------------LFU Algorithm-----------------------------------------------------------------------------------------------------------------------------------", null);
-						ToolKit.printCache(controller);
-						controller.appendLog("debug","Concentrate on the request...",logger);
-						controller.getRequestHandler().processRequestRealTime(lfu,"LFU", i);
-					}
+					controller.getRequestHandler().processRequest(new LFUAlgorithm(), lfuAlgorithm.getText(), (Integer)(timeSlices.getSelectedItem()));
 				}
 
 				if(algorithmSelected == true){
@@ -622,18 +552,15 @@ public class Operator extends JPanel{
 		processThread.start();
 	}
 	
-	public void process(String algorithm, int times){	
-		controller.appendLog("debug","Concentrate on the request...",logger);
-		
-		controller.getRequestHandler().processRequestOneTime(algorithm,times);
-	}
-	
 	
 	public void move() {
 		// 用户移动线程
 		Thread moveThread = new Thread(new Runnable() {
 			public void run() {
 				while (true) {
+					if(controller.getUsers().getSimpleUsers().size() ==0 ){
+						break;
+					}
 					for(int i =0;i< controller.getUsers().getSimpleUsers().size();i++){
 						controller.getUsers().getSimpleUsers().get(i).move();
 					}

@@ -1,6 +1,5 @@
 package cn.edu.tju.simulation.user;
 
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,7 +38,7 @@ public class MobilityModelGenerator {
 			network = chooseNetwork();
 			Point2D.Double point = generatePoint(network);
 		
-			SimpleMobilityModel sm = new SimpleMobilityModel(ID, point,network,Point.distance(point.getX(), point.getY(), network.getLocation().getX(), network.getLocation().getY()));
+			SimpleMobilityModel sm = new SimpleMobilityModel(ID, point,network);
 			controller.getUsers().getSimpleUsers().add(sm);
 			network.getUserOfNetwork().add(sm);
 		}

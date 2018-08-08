@@ -6,18 +6,16 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
 /**
  * Status
- * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin University 
- *
+ * 
+ * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin
+ *         University
+ * 
  */
-public class State implements Cloneable{
+public class State implements Cloneable {
 	/**
 	 * The user to whom this status belongs
 	 */
 	private MobilityModel user;
-	/**
-	 * The time this state occurred
-	 */
-	private String time;
 	/**
 	 * Whether this user request content
 	 */
@@ -26,28 +24,30 @@ public class State implements Cloneable{
 	 * Download content in this state
 	 */
 	private SingleLocalHobby requestSingleContent;
-	
+	/**
+	 * Download time
+	 */
+	private double latency;
+
 	private int remainingTimeSlotNumber;
-	
-	private Boolean isExecute;
+
 	/**
 	 * 
-	 * @param mobilityModel State belongs to the user
-	 * @param time The time this state occurred
-	 * @param media Download content in this state
+	 * @param mobilityModel
+	 *            State belongs to the user
+	 * @param latency
+	 *            The time this state occurred
+	 * @param media
+	 *            Download content in this state
 	 */
-	public State(MobilityModel user,String time,SingleLocalHobby requestSingleContent){
+	public State(MobilityModel user, SingleLocalHobby requestSingleContent) {
 		this.user = user;
-		this.time = time;
-		this.isExecute = false;		
-		if(requestSingleContent == null){
-			this.request = false;
-			this.remainingTimeSlotNumber = 0;
-		}else{
-			this.request = true;
-			this.requestSingleContent = requestSingleContent;
-			this.remainingTimeSlotNumber = requestSingleContent.getTimeSlotNumber();
-		}
+		this.latency = requestSingleContent.getSize() / user.getDownloadRate();
+		System.out.println(requestSingleContent.getSize() + "KB " + user.getDownloadRate()+"KB/s");
+		System.out.println(this.latency + "s");
+		this.request = true;
+		this.requestSingleContent = requestSingleContent;
+		this.remainingTimeSlotNumber = requestSingleContent.getTimeSlotNumber();
 	}
 
 	@Override
@@ -60,19 +60,18 @@ public class State implements Cloneable{
 		}
 		return state;
 	}
-	
-	public void cutTimeSlotNumber(){
+
+	public void cutTimeSlotNumber() {
 		this.remainingTimeSlotNumber--;
 	}
 
-	public String getTime() {
-		return time;
-	}
-	
-	public void setTime(String time) {
-		this.time = time;
+	public double getLatency() {
+		return latency;
 	}
 
+	public void setLatency(double time) {
+		this.latency = time;
+	}
 
 	public SingleLocalHobby getRequestSingleContent() {
 		return requestSingleContent;
@@ -85,20 +84,13 @@ public class State implements Cloneable{
 	public WirelessNetwork getNetwork() {
 		return this.user.getWirelessNetwork();
 	}
-	
+
 	public MobilityModel getUser() {
 		return user;
 	}
+
 	public Boolean getRequest() {
 		return request;
-	}
-
-	public Boolean getIsExecute() {
-		return isExecute;
-	}
-
-	public void setIsExecute(Boolean isExecute) {
-		this.isExecute = isExecute;
 	}
 
 	public int getRemainingTimeSlotNumber() {

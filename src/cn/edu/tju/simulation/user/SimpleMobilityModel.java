@@ -18,7 +18,6 @@ public class SimpleMobilityModel extends MobilityModel{
 		if(Math.random()<=0.5){
 			//假设每次移动最多10米
 			int distance = 10;
-
 			double angle =  Math.random()*Math.PI*2;
 			double x = this.location.getX() + Math.ceil(Math.cos(angle)*distance);
 			double y = this.location.getY()+Math.ceil(Math.sin(angle)*distance);
@@ -35,12 +34,12 @@ public class SimpleMobilityModel extends MobilityModel{
 			for(int k =0;k<ratio.size();k++){
 				if(k!=0){
 					if(temp<=ratio.get(k) && temp>ratio.get(k-1)){
-						state = new State(this, null,content.getContentList().get(k) );
+						state = new State(this, content.getContentList().get(k));
 						break;
 					}
 				}else{
 					if(temp<=ratio.get(k)){
-						state = new State(this, null,content.getContentList().get(k) );
+						state = new State(this, content.getContentList().get(k));
 						break;
 					}
 				}
@@ -51,10 +50,10 @@ public class SimpleMobilityModel extends MobilityModel{
 		}
 	}
 	
-	public SimpleMobilityModel(int ID,Point2D.Double location,WirelessNetwork network,double distance){
+	public SimpleMobilityModel(int ID,Point2D.Double location,WirelessNetwork network){
 		this.ID = ID;
 		this.location = location;
-		this.distance = distance ;
+		this.distance = Point2D.distance(location.getX(), location.getY(), network.getLocation().getX(), network.getLocation().getY());
 		this.wirelessNetwork = network;
 		this.content = new LocalHobby();
 	}

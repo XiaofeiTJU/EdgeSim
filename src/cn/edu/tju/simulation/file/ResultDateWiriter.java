@@ -35,7 +35,7 @@ public class ResultDateWiriter {
 				while(mIt.hasNext()){
 					i++;
 					Data data = mIt.next();
-					bw.write(data.getTimeSlice()+"," +data.getHitRate()+","+data.getSaveTime()+","+data.getSaveTraffic()+" ");
+					bw.write(data.getTimeSlice()+"," +data.getHitRate()+","+data.getLatency()+","+data.getSaveTraffic()+" ");
 					if(i % 8 == 0){
 						bw.write("\r\n");
 					}

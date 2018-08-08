@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import cn.edu.tju.simulation.cache.Query;
 import cn.edu.tju.simulation.content.LocalHobby;
@@ -44,32 +45,47 @@ public abstract class MobilityModel implements Query{
 	protected int sumOfPopularity = 0;
 	
 	protected List<Integer> ratio;
-	
-	
-	
+		
+	public double getDownloadRate(){
+		double k = 0.01;
+		double e = 4;
+		double Gbu = k*Math.pow(this.distance, -e);
+		double Pb = 40; // 单位：W
+		double temp = -174; // 单位dBm/HZ
+		double o = (Math.pow(10, temp/10)) * 0.001; // 单位W/HZ
+		double SNR = Pb*Gbu/(o);
+		double B = 10000000; // 单位HZ
+		double w = (B/this.wirelessNetwork.getUserOfNetwork().size()) * (Math.log(1 + SNR) / Math.log(2));
+		
+		if(w<25165824){
+			w = 25165824;
+		}
+		//return item is B
+		return w / 8 / 1024;
+	}
+
 	public void checkLocationToAdjustNetwork(double x , double y){
 		Point2D.Double networkLocation = this.wirelessNetwork.getLocation();
+		double currentDistance = Point2D.distance(networkLocation.getX(), networkLocation.getY(), x, y);
 		//如果脱离当前的网络
 		WirelessNetwork nextNetwork = null;
-		if(Point2D.distance(networkLocation.getX(), networkLocation.getY(), x, y) > this.wirelessNetwork.getRadius()){
-			if(Math.random()<0.1){
+		if(currentDistance > this.wirelessNetwork.getRadius()){
+			if(Math.random() < 0.1){
 				double minDistance = 0;
 				SameTypeWirelessNetwork BSs = Controller.getInstance().getWirelessNetworkGroup().BS;
 				for(int i = 0; i<BSs.getAmount(); i++){
 					WirelessNetwork bs = BSs.getNetwork(i);
-					double distance = Point2D.distance(bs.getLocation().getX(), bs.getLocation().getY(), x, y);
-					if(distance <= bs.getRadius()){
-						if(nextNetwork == null){
+					double newDistance = Point2D.distance(bs.getLocation().getX(), bs.getLocation().getY(), x, y);
+					if(newDistance <= bs.getRadius()){
+						if(nextNetwork == null || newDistance < minDistance){
 							nextNetwork = bs;
-							minDistance = distance;
-						}else if(distance < minDistance){
-							nextNetwork = bs;
-							minDistance = distance;
+							minDistance = newDistance;
+						}else if (newDistance >= minDistance){
+							break;
 						}
 						//进入新的距离
 						this.location.setLocation(x, y);
 						//重置相互关系
-//						System.out.println("用户"+this.ID+"发生了越界,从网络"+this.wirelessNetwork.getNumber()+"去了网络"+bs.number);
 						this.wirelessNetwork.getUserOfNetwork().remove(this);
 						this.wirelessNetwork = bs;
 						this.wirelessNetwork.getUserOfNetwork().add(this);
@@ -77,17 +93,18 @@ public abstract class MobilityModel implements Query{
 				}
 				if(nextNetwork == null){
 					//跳出了信号范围，越界反转
-					//不动了
 					this.location.setLocation(MobilityModelGenerator.generatePoint(wirelessNetwork));
 				}
 			}else{
 					//用户不想出去了，越界反转
-					//不动了
 				this.location.setLocation(MobilityModelGenerator.generatePoint(wirelessNetwork));
 			}
 		}else{
 			this.location.setLocation(x, y);
 		}
+		
+		// update distance 
+		this.distance = Point2D.distance(this.wirelessNetwork.getLocation().getX(), this.wirelessNetwork.getLocation().getY(), x, y);
 	}
 	
 	/**

@@ -51,14 +51,12 @@ public abstract class Cache {
 	public boolean dealQuery(Object object, SingleLocalHobby singleContent) {
 		if (cacheContent != null) {
 			if (object instanceof WirelessNetwork) {
-				System.out.println("基站開始的请求");
 				if (cacheContent.contains(singleContent)) {
 					return true;
 				} else {
 					return false;
 				}
 			} else if (object instanceof MobilityModel) {
-				System.out.println("用戶開始的请求");
 				if (cacheContent.contains(singleContent)) {
 					return true;
 				} else {
