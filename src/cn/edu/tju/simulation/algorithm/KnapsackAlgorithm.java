@@ -62,10 +62,10 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 				for(int m = 0 ;m<network.getCacheContent().size();m++){
 					maxPopularity += network.getCacheContent().get(m).getSingleContent().getPopularity();
 				}
-				controller.appendLog("debug","The maximum cache popularity£º " + maxPopularity+"  Cached content number£º",null);
-				for(int n = 0 ; n<network.getCacheContent().size();n++){
-					controller.appendLog("debug",network.getCacheContent().get(n).getName()+"",null);
-				}	
+//				controller.appendLog("debug","The maximum cache popularity£º " + maxPopularity+"  Cached content number£º",null);
+//				for(int n = 0 ; n<network.getCacheContent().size();n++){
+//					controller.appendLog("debug",network.getCacheContent().get(n).getName()+"",null);
+//				}	
 			} else {
 				System.out.println("No Cache");
 			}

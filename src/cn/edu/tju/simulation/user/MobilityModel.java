@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import cn.edu.tju.simulation.cache.Query;
 import cn.edu.tju.simulation.content.LocalHobby;
@@ -47,14 +46,14 @@ public abstract class MobilityModel implements Query{
 	protected List<Integer> ratio;
 		
 	public double getDownloadRate(){
-		double k = 0.01;
-		double e = 4;
+		double k = Parameter.PATH_LOSS;
+		double e = Parameter.EXPONENT;
 		double Gbu = k*Math.pow(this.distance, -e);
-		double Pb = 40; // 单位：W
-		double temp = -174; // 单位dBm/HZ
+		double Pb = Parameter.TRANSMISSION_POWER; // 单位：W
+		double temp = Parameter.GAUSSIAN_WHITE_NOISE_POWER; // 单位dBm/HZ
 		double o = (Math.pow(10, temp/10)) * 0.001; // 单位W/HZ
 		double SNR = Pb*Gbu/(o);
-		double B = 10000000; // 单位HZ
+		double B = Parameter.BANDWIDTH * 1000000; // 单位HZ
 		double w = (B/this.wirelessNetwork.getUserOfNetwork().size()) * (Math.log(1 + SNR) / Math.log(2));
 		
 		if(w<25165824){

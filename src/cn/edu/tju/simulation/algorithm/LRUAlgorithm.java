@@ -10,7 +10,7 @@ import cn.edu.tju.simulation.controller.Controller;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
 
 /**
- * 最近最少使用
+ * LRU
  * 
  * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin
  *         University
@@ -18,33 +18,18 @@ import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;
  */
 public class LRUAlgorithm implements RealTimeAlgorithm {
 
-	/**
-	 * 最后面的是最新的
-	 * 
-	 * @param network
-	 * @param requestContent
-	 */
 	public void setCache(WirelessNetwork network, SingleLocalHobby requestContent) {
 		long remainingSize = network.getRemainingCacheSize();
 		LinkedList<CachingSingleContent> cachingContentList = network.getCacheContent();
 		CachingSingleContent includeContent = include(cachingContentList,requestContent);
 
-		// System.out.println("请求的内容："+requestContent.getName());
 		if (includeContent != null) {
-			// 缓存中现在包含这个内容，把它放到最前面
-			// System.out.println("缓存中已经存在，替换到最前面");
 			cachingContentList.remove(includeContent);
 			cachingContentList.addFirst(includeContent);
 		} else if (network.getCacheSize() >= requestContent.getSize()) {
 			if (remainingSize >= requestContent.getSize()) {
-				// 能装下
-				// System.out.println("缓存中能装下，直接缓存");
 				cachingContentList.addFirst(new CachingSingleContent(requestContent.getSingleContent()));
 			} else {
-				// System.out.println("剩余大小："+remainingSize +" 缓存的大小:"+
-				// network.getCacheSize()*(float)(1f/6f));
-				// 装不下，一个一个往外扔，直到装下为止
-				// System.out.println("装不下，一个一个往外扔，直到装下为止");
 				while(cachingContentList.size()!=0){
 					remainingSize -= cachingContentList.getLast().getSize();
 					cachingContentList.removeLast();

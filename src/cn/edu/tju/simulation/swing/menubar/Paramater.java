@@ -2,6 +2,7 @@ package cn.edu.tju.simulation.swing.menubar;
 
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -26,12 +27,12 @@ import cn.edu.tju.simulation.handler.Pretreatment;
  */
 public class Paramater extends JFrame{
 	private static final long serialVersionUID = -1700018443869451957L;
-	private JLabel powerLaw_R;
-	private JLabel powerLaw_C;
+	private JLabel ZIPF_SAMPLE;
+	private JLabel ZIPF_CONEFFICIENT;
 	private JLabel requestProbability;
 	private JLabel timeSlicesNumber;
-	private JTextField powerLaw_R_Text;
-	private JTextField powerLaw_C_Text;
+	private JTextField ZIPF_SAMPLE_Text;
+	private JTextField ZIPF_CONEFFICIENT_Text;
 	private JTextField requestProbability_Text;
 	private JTextField timeSlicesNumber_Text;
 	private JButton ensure;
@@ -54,17 +55,37 @@ public class Paramater extends JFrame{
 	private JFrame rootFrame;
 	private Controller controller;
 	
+	private JLabel transmissionPower;
+	private JTextField transmissionPower_Text;
+	
+	private JLabel noisePower;
+	private JTextField noisePower_Text;
+	
+	private JLabel exponent;
+	private JTextField exponent_Text;
+	
+	private JLabel bandWidth;
+	private JTextField bandWidth_Text;
+	
+	private JLabel pathLoss;
+	private JTextField pathLoss_Text;
+	
 	public Paramater(Container frame,Controller controller){
 		this.rootFrame = (JFrame)frame;
 		this.controller = controller;
 		
-		this.powerLaw_R = new JLabel("PowerLaw R :");
-		this.powerLaw_C = new JLabel("PowerLaw C :");
+		this.ZIPF_SAMPLE = new JLabel("Zipf Sample :");
+		this.ZIPF_CONEFFICIENT = new JLabel("Zipf Exponent :");
 		this.requestProbability = new JLabel("Request Probability :");
 		this.timeSlicesNumber = new JLabel("Time Slices Number :");
+		this.exponent = new JLabel("Exponent:");
+		this.transmissionPower = new JLabel("Transmission Power:");
+		this.noisePower = new JLabel("Noise:");
+		this.bandWidth = new JLabel("Bandwidth:");
+		this.pathLoss = new JLabel("Path Loss:");
 		
-		this.powerLaw_R_Text = new JTextField();
-		this.powerLaw_C_Text = new JTextField();
+		this.ZIPF_SAMPLE_Text = new JTextField();
+		this.ZIPF_CONEFFICIENT_Text = new JTextField();
 		this.requestProbability_Text = new JTextField();
 		this.timeSlicesNumber_Text = new JTextField();
 		
@@ -75,9 +96,15 @@ public class Paramater extends JFrame{
 		this.userMaxWaveInterval = new JTextField();
 		this.userMinWaveInterval = new JTextField();
 		this.userWaveIntervalLabel = new JLabel("Fluctuation :");
-	
-		this.ensure = new JButton("确定");
-		this.cancel = new JButton("取消");
+		
+		this.exponent_Text = new JTextField();
+		this.transmissionPower_Text = new JTextField();
+		this.noisePower_Text = new JTextField();
+		this.bandWidth_Text = new JTextField();
+		this.pathLoss_Text = new JTextField();
+			
+		this.ensure = new JButton("OK");
+		this.cancel = new JButton("Cancel");
 		
 		initial();
 	}
@@ -85,43 +112,52 @@ public class Paramater extends JFrame{
 	public void initial(){
 		this.setTitle("Configure");
         this.setLocation(300,200);
-		this.setSize(530, 300);
+		this.setSize(400, 600);
         this.setVisible(true);
 		this.setResizable(false);
-		this.setLayout(null);
+		this.setLayout(new GridLayout(6 ,0, 0, 10));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
 		{
-			JPanel content = new JPanel();
-			content.setLayout(new GridLayout(0,2, 0, 10));
+			JPanel content = new JPanel(new GridLayout(0,4, 0, 10));
 			content.setBorder(BorderFactory.createTitledBorder(content.getBorder(), "Content"));
-			content.setBounds(30, 10, 200, 90);
-			content.add(powerLaw_R);
-			content.add(powerLaw_R_Text);
-			content.add(powerLaw_C);
-			content.add(powerLaw_C_Text);
 			
-			powerLaw_R_Text.setText(Float.toString(Parameter.PowerLaw_R));
-			powerLaw_C_Text.setText(Integer.toString(Parameter.PowerLaw_C));
+		
+			content.add(ZIPF_SAMPLE);
+			content.add(ZIPF_SAMPLE_Text);
+			content.add(ZIPF_CONEFFICIENT);
+			content.add(ZIPF_CONEFFICIENT_Text);
+			content.add(new Label());
+			
+			ZIPF_SAMPLE_Text.setText(Integer.toString(Parameter.ZIPF_SAMPLE));
+			ZIPF_CONEFFICIENT_Text.setText(Double.toString(Parameter.ZIPF_CONEFFICIENT));
 			
 			this.add(content);
 		}
 		
 		{
-			JPanel user = new JPanel();
-			user.setLayout(new GridLayout(0,2, 0, 10));
+			JPanel user = new JPanel(new GridLayout(2,0, 0, 10));
 			user.setBorder(BorderFactory.createTitledBorder(user.getBorder(), "User"));
-			user.setBounds(250, 10, 250, 90);
-			user.add(requestProbability);
-			user.add(requestProbability_Text);
-			user.add(userWaveIntervalLabel);
+			
+			JPanel upper = new JPanel(new GridLayout(0,3,0,10));	
+			upper.add(requestProbability);
+			JPanel uppser_text = new JPanel(new GridLayout(0,2,0,10));
+			uppser_text.add(requestProbability_Text);
+			upper.add(uppser_text);
+			upper.add(new Label());
+			user.add(upper);
+			
+			JPanel below = new JPanel(new GridLayout(0,4,0,10));
+			below.add(userWaveIntervalLabel);
 			JPanel userWaveInterval = new JPanel();
 			userWaveInterval.setLayout(new GridLayout(0,3, 0, 10));
 			userWaveInterval.add(userMinWaveInterval);
 			userWaveInterval.add(new JLabel("~"));
 			userWaveInterval.add(userMaxWaveInterval);
-			user.add(userWaveInterval);
+			below.add(userWaveInterval);
+			
+			user.add(below);
 			
 			userMinWaveInterval.setText(Float.toString(Parameter.UserMinWaveInterval));
 			userMaxWaveInterval.setText(Float.toString(Parameter.UserMaxWaveInterval));
@@ -134,17 +170,17 @@ public class Paramater extends JFrame{
 		
 		{
 			JPanel network = new JPanel();
-			network.setLayout(new GridLayout(0,2, 0, 10));
+			network.setLayout(new GridLayout(2,0, 0, 10));
 			network.setBorder(BorderFactory.createTitledBorder(network.getBorder(), "Network"));
-			network.setBounds(30, 110, 200, 90);
-			network.add(BSWaveIntervalLabel);
+			JPanel upper = new JPanel(new GridLayout(0,4, 0, 10));
+			upper.add(BSWaveIntervalLabel);
 			JPanel BSWaveInterval = new JPanel();
 			BSWaveInterval.setLayout(new GridLayout(0,3, 0, 10));
 			BSWaveInterval.add(BSMinWaveInterval);
 			BSWaveInterval.add(new JLabel("~"));
 			BSWaveInterval.add(BSMaxWaveInterval);
-			network.add(BSWaveInterval);
-			network.add(new JLabel());
+			upper.add(BSWaveInterval);
+			network.add(upper);
 			
 			BSMinWaveInterval.setText(Float.toString(Parameter.BSMinWaveInterval));
 			BSMaxWaveInterval.setText(Float.toString(Parameter.BSMaxWaveInterval));
@@ -154,13 +190,48 @@ public class Paramater extends JFrame{
 		}
 		
 		{
+			JPanel communication = new JPanel();
+			communication.setLayout(new GridLayout(2,0, 0, 10));
+			communication.setBorder(BorderFactory.createTitledBorder(communication.getBorder(), "Communication"));
+			JPanel upper = new JPanel(new GridLayout(0,6, 0, 10));	
+			upper.add(pathLoss);
+			upper.add(pathLoss_Text);
+			upper.add(exponent);
+			upper.add(exponent_Text);
+			upper.add(noisePower);
+			upper.add(noisePower_Text);
+			
+			JPanel below = new JPanel(new GridLayout(0,3,0,10));
+			JPanel below_bandwidth = new JPanel(new GridLayout(0,2,0,10));
+			below_bandwidth.add(bandWidth);
+			below_bandwidth.add(bandWidth_Text);
+			below.add(below_bandwidth);
+			below.add(transmissionPower);
+			below.add(transmissionPower_Text);
+			
+			communication.add(upper);
+			communication.add(below);
+			
+			pathLoss_Text.setText(Float.toString(Parameter.PATH_LOSS));
+			exponent_Text.setText(Float.toString(Parameter.EXPONENT));
+			noisePower_Text.setText(Float.toString(Parameter.GAUSSIAN_WHITE_NOISE_POWER));
+			bandWidth_Text.setText(Float.toString(Parameter.BANDWIDTH));
+			transmissionPower_Text.setText(Float.toString(Parameter.TRANSMISSION_POWER));
+			
+			this.add(communication);
+		}
+		
+		{
 			JPanel system = new JPanel();
-			system.setLayout(new GridLayout(0,2, 0, 10));
+			system.setLayout(new GridLayout(0,3, 0, 10));
 			system.setBorder(BorderFactory.createTitledBorder(system.getBorder(), "System"));
-			system.setBounds(250, 110, 250, 90);
 			system.add(timeSlicesNumber);
-			system.add(timeSlicesNumber_Text);
-			system.add(new JLabel());
+			JPanel second = new JPanel(new GridLayout(0,2,0,10));
+			second.add(timeSlicesNumber_Text);
+			system.add(second);
+			system.add(new Label());
+			system.add(new Label());
+
 			this.timeSlicesNumber_Text.setText(controller.getOperationPanel().getTimeSlices().getSelectedItem().toString());
 			
 			this.add(system);
@@ -207,8 +278,13 @@ public class Paramater extends JFrame{
 		Parameter.BSMaxWaveInterval = Float.parseFloat(this.BSMaxWaveInterval.getText());
 		Parameter.UserMinWaveInterval = Float.parseFloat(this.userMinWaveInterval.getText());
 		Parameter.UserMaxWaveInterval = Float.parseFloat(this.userMaxWaveInterval.getText());
-		Parameter.PowerLaw_C = Integer.parseInt(this.powerLaw_C_Text.getText());
-		Parameter.PowerLaw_R = Float.parseFloat(this.powerLaw_R_Text.getText());
+		Parameter.ZIPF_SAMPLE = Integer.parseInt(this.ZIPF_SAMPLE_Text.getText());
+		Parameter.ZIPF_CONEFFICIENT = Double.parseDouble(this.ZIPF_CONEFFICIENT_Text.getText());
+		Parameter.PATH_LOSS = Float.parseFloat(this.pathLoss_Text.getText());
+		Parameter.EXPONENT = Float.parseFloat(this.exponent_Text.getText());
+		Parameter.GAUSSIAN_WHITE_NOISE_POWER = Float.parseFloat(this.noisePower_Text.getText());
+		Parameter.BANDWIDTH = Float.parseFloat(this.bandWidth_Text.getText());
+		Parameter.TRANSMISSION_POWER = Float.parseFloat(this.transmissionPower_Text.getText());
 		
 		controller.getOperationPanel().getTimeSlices().setSelectedItem(Integer.parseInt(this.timeSlicesNumber_Text.getText()));
 		

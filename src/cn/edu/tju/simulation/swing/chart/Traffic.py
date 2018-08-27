@@ -41,11 +41,11 @@ figure, ax = plt.subplots(num="TRAFFIC AFFLOAD", figsize=figsize)
 set the scale
 '''
 #set the coordinate range of value
-plt.ylim(0, 10)
+plt.ylim(0, 0.4)
 plt.xlim(0, len(algorithm_data_list[-1].Data))
 #set the scale
 #set the x major scale label to a multiple of 5
-xmajorLocator = MultipleLocator(20);
+xmajorLocator = MultipleLocator(2);
 #set the format of the x-axis label text
 xmajorFormatter = FormatStrFormatter('%3.0f')
 #Set the x-axis minor scale label to a multiple of 1
@@ -54,9 +54,9 @@ xmajorFormatter = FormatStrFormatter('%3.0f')
 ax.xaxis.set_major_locator(xmajorLocator)
 ax.xaxis.set_major_formatter(xmajorFormatter)
 #Set the y-axis main scale label to a multiple of 0.05%
-ymajorLocator = MultipleLocator(2)
+ymajorLocator = MultipleLocator(0.1)
 #Set the format of the y-axis label text
-ymajorFormatter = FormatStrFormatter('%3.0f')
+ymajorFormatter = FormatStrFormatter('%.2f')
 #Set this y-axis minor tick label to a multiple of 0.2
 # yminorLocator = MultipleLocator(0.2)
 #Load y-axis settings
@@ -85,16 +85,17 @@ labels = ax.get_xticklabels() + ax.get_yticklabels()
 Drawing
 '''
 for algorithm in algorithm_data_list:
-    if "QLEARNING" in algorithm.Algorithm:
-        plt.plot(algorithm.Data, color = 'red', marker= ">", linewidth=2, markersize = 10, label=algorithm.Algorithm)
+    if "KNAPSACK" in algorithm.Algorithm:
+        plt.plot(algorithm.Data, color = 'red', marker= "o", linewidth=2, markersize = 10, label=algorithm.Algorithm)
     elif "GREEDY" in algorithm.Algorithm:
         plt.plot(algorithm.Data, color = 'blue', marker= ">", linewidth=2, markersize = 10, label=algorithm.Algorithm)
     elif "LFU" in algorithm.Algorithm:
-        plt.plot(algorithm.Data, color = 'blue', marker= "p",linewidth=2, markersize = 10, linestyle="--", label=algorithm.Algorithm)
+        plt.plot(algorithm.Data, color = 'orange', marker= "p",linewidth=2, markersize = 10, linestyle="--", label=algorithm.Algorithm)
     elif "LRU" in algorithm.Algorithm:
         plt.plot(algorithm.Data, color = 'green', marker= "*", linewidth=2, markersize = 10, linestyle=":", label=algorithm.Algorithm)
     else:
         plt.plot(algorithm.Data, linewidth=2, label=algorithm.Algorithm)
+
 
 
 plt.xlabel("Time Silce", font)

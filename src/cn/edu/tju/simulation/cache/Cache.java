@@ -3,8 +3,6 @@ package cn.edu.tju.simulation.cache;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import cn.edu.tju.simulation.content.CachingSingleContent;
 import cn.edu.tju.simulation.content.SingleContent;
 import cn.edu.tju.simulation.content.SingleLocalHobby;
@@ -100,8 +98,6 @@ public abstract class Cache {
 			Iterator<CachingSingleContent> it = cacheContent.iterator();
 			while (it.hasNext()) {
 				CachingSingleContent cachingSingleContent = it.next();
-				// 正在被下载
-				// System.out.println("内容"+cachingSingleContent.getName()+"正在被下载~~~~~~~~~~  它的大小是："+cachingSingleContent.getSize());
 				remainingCachesize -= cachingSingleContent.getSize();
 			}
 			return remainingCachesize;

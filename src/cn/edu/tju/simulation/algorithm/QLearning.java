@@ -22,12 +22,10 @@ public class QLearning implements OneTimeAlgorithm{
 	private Controller controller;
 	private int b = 5;
 	private int C = 0;
-	//记录每个基站的奖赏值列表
 	private HashMap<WirelessNetwork , List<reward>> Q;
 
 	
 	public QLearning(){
-		//为每个基站创建一个表
 		this.controller = Controller.getInstance();
 		this.Q = new HashMap<WirelessNetwork, List<reward>>();
 		for(int i =0;i<controller.getWirelessNetworkGroup().BS.getAmount();i++){
@@ -36,7 +34,6 @@ public class QLearning implements OneTimeAlgorithm{
 	}
 	
 	public void setCache(){
-		//遍历基站
 		for(int j=0;j<Controller.getInstance().getWirelessNetworkGroup().BS.getAmount();j++){
 			WirelessNetwork network = Controller.getInstance().getWirelessNetworkGroup().BS.getNetwork(j);
 			long size = network.getCacheSize();
@@ -72,7 +69,6 @@ public class QLearning implements OneTimeAlgorithm{
 				}
 			}
 			
-			//按奖赏值对内容排序
 			Collections.sort(Q.get(network),new Comparator<reward>() {
 				public int compare(reward rewardOne, reward rewardTwo) {
 					float rewardone = rewardOne.reward;
@@ -87,7 +83,6 @@ public class QLearning implements OneTimeAlgorithm{
 				}
 			});	
 			
-			//按奖赏值，一个一个往里装
 			for (reward mReward : Q.get(network)) {
 				if (size != 0 && size > mReward.singleContent.getSize()) {
 					if (network.addCacheContent(mReward.singleContent)) {

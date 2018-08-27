@@ -37,7 +37,6 @@ import cn.edu.tju.simulation.handler.RequestHandler;
 import cn.edu.tju.simulation.swing.chart.DelayLineChart;
 import cn.edu.tju.simulation.swing.chart.PythonInterpreter;
 import cn.edu.tju.simulation.swing.chart.TimeLineChart;
-import cn.edu.tju.simulation.tool.ToolKit;
 import cn.edu.tju.simulation.user.MobilityModelGenerator;
 import cn.edu.tju.simulation.wirelessnetwork.SameTypeWirelessNetwork;
 import cn.edu.tju.simulation.wirelessnetwork.WirelessNetwork;

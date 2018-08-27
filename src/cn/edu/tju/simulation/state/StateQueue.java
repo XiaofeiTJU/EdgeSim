@@ -26,7 +26,6 @@ public class StateQueue {
 	
 	public void generateStateQueue(){
 		Controller controller = Controller.getInstance();
-		//暂时没加日志
 		controller.appendLog("debug","Create status...",logger);
 
 		stateQueueMap.clear();
@@ -34,7 +33,6 @@ public class StateQueue {
 		for(int i = 0; i < Parameter.TimeSlicesMaxNumber; i++){
 			List<State> list = new ArrayList<State>();
 			if(i == 0){
-				System.out.println("------------------------第1个时间片------------------------");
 				this.stateQueueMap.put(i, controller.getUsers().generateStateList());
 			}else{
 				List<MobilityModel> simpleUserList = controller.getUsers().getSimpleUsers();
@@ -47,17 +45,6 @@ public class StateQueue {
 				this.stateQueueMap.put(i,list);
 			}
 		}
-		
-//		Iterator<Integer> it = this.stateQueueMap.keySet().iterator();
-//		while(it.hasNext()){
-//			int time = it.next();
-//			System.out.println("------------------------第"+(time+1)+"个时间片------------------------");
-//
-//			List<State> stateList = stateQueueMap.get(time);
-//			for(int i = 0 ; i<stateList.size() ; i++){
-//				System.out.println(stateList.get(i).getUser().getID()+"请求内容"+stateList.get(i).getRequestSingleContent().getName()+",剩余时间"+stateList.get(i).getRemainingTimeSlotNumber());
-//			}
-//		}
 	}
 	
 	public void assignStateToNetwork(int key){
@@ -67,7 +54,7 @@ public class StateQueue {
 			it.next().getStatesQueue().clear();
 		}
 
-		//选一个队列组合
+		//choose one state queue
 		List<State> stateList = controller.getStateQueue().getStateList(key);
 		
 		Iterator<State> mIt = stateList.iterator();

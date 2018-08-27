@@ -3,7 +3,7 @@ package cn.edu.tju.simulation.content;
 
 /**
  * Multimedia content
- * @author ÀîÎÄ¿­
+ * @author Wenkai Li ,School of Computer Science and Technology ,Tianjin University 
  *
  */
 public class SingleContent{

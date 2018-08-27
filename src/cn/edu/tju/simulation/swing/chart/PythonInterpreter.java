@@ -16,13 +16,4 @@ public class PythonInterpreter {
 			e.printStackTrace();
 		} 
 	}
-	
-	public static void main(String[] args) {
-		try {
-			new PythonInterpreter().interpreter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

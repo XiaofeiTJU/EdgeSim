@@ -26,7 +26,7 @@ public class LFUAlgorithm implements RealTimeAlgorithm{
 		LinkedList<CachingSingleContent> cachingContentList =  requestedNetwork.getCacheContent();
 		List<SingleLocalHobby> list =  requestedNetwork.getContent().getContentList();
 		ContentService.sortMySingleContentByRequestedAmount(requestedNetwork.getContent().getContentList());
-		//request次数没有初始化
+		//request have not init
 		
 		cachingContentList.clear();
 		

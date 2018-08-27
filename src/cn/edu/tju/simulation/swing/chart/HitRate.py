@@ -41,7 +41,7 @@ figure, ax = plt.subplots(num="HIT RATE", figsize=figsize)
 set the scale
 '''
 #set the coordinate range of value
-plt.ylim(0, 15)
+plt.ylim(0, 20)
 plt.xlim(0, len(algorithm_data_list[-1].Data))
 #set the scale
 #set the x major scale label to a multiple of 5
@@ -87,12 +87,12 @@ labels = ax.get_xticklabels() + ax.get_yticklabels()
 Drawing
 '''
 for algorithm in algorithm_data_list:
-    if "QLEARNING" in algorithm.Algorithm:
-        plt.plot(algorithm.Data, color = 'red', marker= ">", linewidth=2, markersize = 10, label=algorithm.Algorithm)
+    if "KNAPSACK" in algorithm.Algorithm:
+        plt.plot(algorithm.Data, color = 'red', marker= "o", linewidth=2, markersize = 10, label=algorithm.Algorithm)
     elif "GREEDY" in algorithm.Algorithm:
         plt.plot(algorithm.Data, color = 'blue', marker= ">", linewidth=2, markersize = 10, label=algorithm.Algorithm)
     elif "LFU" in algorithm.Algorithm:
-        plt.plot(algorithm.Data, color = 'blue', marker= "p",linewidth=2, markersize = 10, linestyle="--", label=algorithm.Algorithm)
+        plt.plot(algorithm.Data, color = 'orange', marker= "p",linewidth=2, markersize = 10, linestyle="--", label=algorithm.Algorithm)
     elif "LRU" in algorithm.Algorithm:
         plt.plot(algorithm.Data, color = 'green', marker= "*", linewidth=2, markersize = 10, linestyle=":", label=algorithm.Algorithm)
     else:
