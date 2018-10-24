@@ -2,7 +2,7 @@
 
 ----
 ## About EdgeSim
-![Build Status](https://travis-ci.com/XiaofeiTJU/EdgeSim.svg?token=py9hxdKvrcD4MPz5n1nH&branch=master) <br>
+*![Build Status](https://travis-ci.com/XiaofeiTJU/EdgeSim.svg?token=py9hxdKvrcD4MPz5n1nH&branch=master) <br>
 An open-source simulator of edge computing and caching.
 
 ----
