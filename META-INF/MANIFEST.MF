@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: cn.edu.tju.simulation.swing.EdgeCachingSimulation
-Class-Path:  lib/log4j-1.2.17.jar
-

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<palette>
-	<category id="someUniqueId" name="Custom category" description="Category added for project EdgeCachingSimulation(Swing)" open="true">
-		<component class="javax.swing.JButton"/>
-		<component class="javax.swing.JRadioButton" name="Your name" description="You can write any description here."/>
-	</category>
-</palette>
