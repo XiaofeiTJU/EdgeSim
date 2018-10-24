@@ -1,0 +1,2 @@
+2018-10-23 11:53:50  [ cn.edu.tju.simulation.main.EdgeSim.<init>(EdgeSim.java:81) ] - [ INFO ]  The program is running
+2018-10-23 11:59:25  [ cn.edu.tju.simulation.main.EdgeSim$MyActionListener.windowClosing(EdgeSim.java:163) ] - [ INFO ]  The program is closed normally

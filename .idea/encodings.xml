@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/content/ContentService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/file/ParameterFileReader.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/handler/Pretreatment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/handler/RequestHandler.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/main/EdgeSim.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/swing/chart/NumberLineChart.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/swing/chart/TrafficLoadLineChart.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/swing/map/MapCanvas.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/swing/operator/Operator.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/cn/edu/tju/simulation/user/SimpleMobilityModel.java" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>
