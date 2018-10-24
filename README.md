@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/XiaofeiTJU/EdgeSim/blob/master/images/Logo.png"></p>
+<p align="center"><img src="https://github.com/XiaofeiTJU/EdgeSim/blob/master/src/main/resources/images/Logo.png"></p>
 
 ----
 ## About EdgeSim
