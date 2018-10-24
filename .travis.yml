@@ -1,4 +1,6 @@
-language: python
+language: java
 
+jdk:
+  - oraclejdk10
 
 script: true
