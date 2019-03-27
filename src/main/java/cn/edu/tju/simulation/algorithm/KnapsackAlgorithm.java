@@ -19,14 +19,13 @@ public class KnapsackAlgorithm implements OneTimeAlgorithm{
 	 * Controller
 	 */
 	private Controller controller ;
-	
+
 	public KnapsackAlgorithm(){
 		this.controller = Controller.getInstance();
 	}
-	
+
 	/**
 	 * Configure cache
-	 * @param controller
 	 */
 	public void setCache() {
 		SameTypeWirelessNetwork BSs = controller.getWirelessNetworkGroup().BS;

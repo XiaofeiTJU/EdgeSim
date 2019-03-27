@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FIFOAlgorithm {
+public class FIFOAlgorithm implements RealTimeAlgorithm {
 
     public void setCache(WirelessNetwork network, SingleLocalHobby requestContent) {
         long remainingSize = network.getRemainingCacheSize();

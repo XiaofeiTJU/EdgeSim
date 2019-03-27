@@ -24,7 +24,6 @@ import cn.edu.tju.simulation.algorithm.GreedyAlgorithm;
 import cn.edu.tju.simulation.algorithm.KnapsackAlgorithm;
 import cn.edu.tju.simulation.algorithm.LFUAlgorithm;
 import cn.edu.tju.simulation.algorithm.LRUAlgorithm;
-import cn.edu.tju.simulation.algorithm.QLearning;
 import cn.edu.tju.simulation.content.ContentService;
 import cn.edu.tju.simulation.content.SingleLocalHobby;
 import cn.edu.tju.simulation.controller.Controller;
@@ -152,7 +151,6 @@ public class Operator extends JPanel{
 	private JTextField userAmountText;
 	private JCheckBox knapsackAlgorithm;
 	private JCheckBox greedyAlgorithm;
-	private JCheckBox qLearningAlgotirhm;
 	private JCheckBox lruAlgorithm;
 	private JCheckBox lfuAlgorithm;
 	private JComboBox<Integer> timeSlices;
@@ -362,10 +360,8 @@ public class Operator extends JPanel{
 				{
 					knapsackAlgorithm = new JCheckBox();
 					greedyAlgorithm = new JCheckBox();
-					qLearningAlgotirhm = new JCheckBox();
 					lruAlgorithm = new JCheckBox();
 					lfuAlgorithm = new JCheckBox();
-					qLearningAlgotirhm.setText("QLEARNING");
 					knapsackAlgorithm.setText("KNAPSACK");
 					greedyAlgorithm.setText("GREEDY");	
 					lruAlgorithm.setText("LRU");
@@ -387,7 +383,6 @@ public class Operator extends JPanel{
 					this.add(timeSlicesPanel);
 					this.add(knapsackAlgorithm);
 					this.add(greedyAlgorithm);
-					this.add(qLearningAlgotirhm);
 					this.add(lruAlgorithm);
 					this.add(lfuAlgorithm);
 					this.add(run);
@@ -496,13 +491,6 @@ public class Operator extends JPanel{
 					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
 					controller.getWirelessNetworkGroup().clearAllCache();
 					controller.getRequestHandler().processRequest(new GreedyAlgorithm(), greedyAlgorithm.getText(), (Integer)(timeSlices.getSelectedItem()));
-				}
-				
-				if(qLearningAlgotirhm.isSelected()){
-					algorithmSelected = true;
-					ContentService.resetMyHobby(initialMyHobbyMap,controller.getWirelessNetworkGroup().BS);
-					controller.getWirelessNetworkGroup().clearAllCache();
-					controller.getRequestHandler().processRequest(new QLearning(), qLearningAlgotirhm.getText(), (Integer)(timeSlices.getSelectedItem()));
 				}
 				
 				if(lruAlgorithm.isSelected()){
